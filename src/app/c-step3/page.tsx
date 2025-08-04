@@ -24,7 +24,7 @@ export default function PropertyTypeSelection() {
   const [error, setError] = useState("");
   const [selected, setSelected] = useState(0);
 
-  const handleNextClick = (e) => {
+  const handleNextClick = (e: { preventDefault: () => void; }) => {
     if (selectedOption === "Other" && otherText.trim() === "") {
       e.preventDefault();
       setError("Please enter the property type.");
