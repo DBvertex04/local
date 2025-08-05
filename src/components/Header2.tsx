@@ -11,7 +11,7 @@ const Header2 = () => {
   return (
     <div className="w-full z-50 py-4 absolute top-0 left-0">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="p-2 outline outline-[2px] outline-[#ffffff] rounded-3xl shadow-md bg-[#e9e9e9]">
+        <div className="p-2 outline-[2px] outline-[#ffffff] rounded-3xl shadow-md bg-[#e9e9e9]">
           <div className="p-[1px] bg-white rounded-3xl shadow-md">
             <nav className="bg-white rounded-3xl px-6 py-3 flex items-center justify-between relative">
               {/* Left Side Pills */}

@@ -20,7 +20,7 @@ const options = [
   { label: "Plot", image: "/plot.png" },
   { label: "Land", image: "/land.png" },
   { label: "Farm House", image: "/farm.png" },
-  { label: "Agricultural Land", image: "agriculture.png" },
+  { label: "Agricultural Land", image: "/Parking.png" },
 ];
 
 
