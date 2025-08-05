@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
-import Header2 from "@/components/Header2";
+import Header3 from "@/components/Header3";
 import Step1 from "@/components/BrokerSteps/Broker1";
 import Step2 from "@/components/BrokerSteps/Broker2";
 import Step3 from "@/components/BrokerSteps/Broker3";
@@ -164,9 +164,9 @@ export default function BrokerProfilePage() {
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
       />
-      <Header2 />
+      <Header3 />
 
-      <img
+      {/* <img
         src="/bubble.png"
         alt="Bubble 2"
         className="absolute top-0 right-0 w-[120px] md:w-[190px] z-0 opacity-80"
@@ -175,7 +175,7 @@ export default function BrokerProfilePage() {
         src="/bubble1.png"
         alt="Bubble 1"
         className="absolute top-0 right-0 w-[90px] md:w-[134px] z-10"
-      />
+      /> */}
 
       {/* Mobile Stepper */}
       {/* Mobile Stepper */}
@@ -230,7 +230,7 @@ export default function BrokerProfilePage() {
 
       {/* Desktop View */}
       <main className="hidden lg:block pt-[140px] px-4">
-        <div className="max-w-[1264px] mx-auto grid grid-cols-[449px_1fr]">
+        <div className="max-w-[1388px] mx-auto grid grid-cols-[449px_1fr]">
           {/* Sidebar Stepper */}
           <div className="relative p-6">
             <ul className="relative ml-6 mt-6 space-y-8">
@@ -297,7 +297,7 @@ export default function BrokerProfilePage() {
           </div>
 
           {/* Step Content */}
-          <div className="bg-white rounded-[35px] shadow-md p-10 mt-[30px] max-w-[800px] w-full">
+          <div className="bg-white rounded-[35px] shadow-md p-10 mt-[30px]" style={{width: "1037px"}}>
             <p className="text-sm font-medium text-gray-500">
               Step {currentStep + 1} / {steps.length}
             </p>

@@ -162,6 +162,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your first name<span className="text-red-500">*</span>
           </label>
           <input
+          style={{width:'350px'}}
             type="text"
             name="firstName"
             value={formData.firstName}
@@ -181,6 +182,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your last name<span className="text-red-500">*</span>
           </label>
           <input
+          style={{width:'350px'}}
             type="text"
             name="lastName"
             value={formData.lastName}
@@ -200,6 +202,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your phone number<span className="text-red-500">*</span>
           </label>
           <input
+          style={{width:'350px'}}
             type="tel"
             name="phone"
             value={formData.phone}
@@ -219,6 +222,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your email<span className="text-red-500">*</span>
           </label>
           <input
+          style={{width:'350px'}}
             type="email"
             name="email"
             value={formData.email}
@@ -238,6 +242,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your firm name (optional)
           </label>
           <input
+          style={{width:'350px'}}
             type="text"
             name="firmName"
             value={formData.firmName || ""}
@@ -246,6 +251,26 @@ const Step1: React.FC<Step1Props> = ({
             placeholder="Ex. Gurgaon Realty Hub"
           />
         </div>
+        <div className="relative w-fit">
+  <label className="block text-md font-semibold mb-1">
+    Enter Office Address (optional)
+  </label>
+  <div className="relative">
+    <input
+      type="text"
+      name="firmName"
+      value={formData.firmName || ""}
+      onChange={handleChange}
+      placeholder="Ex. DLF Cyber City, Tower 10, Phase II"
+      style={{ width: "350px" }}
+      className="w-full border border-gray-300 rounded-2xl p-2 pr-10" // Note pr-10
+    />
+    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+      <img src="/broker/location.webp" alt="" style={{width:'22px'}}/> {/* You can replace this with a real icon */}
+    </span>
+  </div>
+</div>
+
 
         <div className="col-span-2 flex items-center gap-2">
           <input
@@ -269,7 +294,7 @@ const Step1: React.FC<Step1Props> = ({
         )}
 
         <div className="col-span-2 text-right">
-          <button
+          <button style={{marginRight:'147px'}}
             type="button"
             onClick={handleNext}
             className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full md:w-[40%]"
