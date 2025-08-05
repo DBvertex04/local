@@ -36,7 +36,7 @@ const Step1: React.FC<Step1Props> = ({
       {/* Mobile View */}
       <form className="space-y-5 lg:hidden">
         <div>
-          <label className="block font-bold">
+          <label className="block font-semibold text-[14px]">
             Enter your first name<span className="text-red-500">*</span>
           </label>
           <input
@@ -55,7 +55,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block font-bold">
+          <label className="block font-semibold text-[14px]">
             Enter your last name<span className="text-red-500">*</span>
           </label>
           <input
@@ -74,7 +74,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block font-bold">
+          <label className="block font-semibold text-[14px]">
             Enter your phone number<span className="text-red-500">*</span>
           </label>
           <input
@@ -93,7 +93,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block font-bold">
+          <label className="block font-semibold text-[14px]">
             Enter your email<span className="text-red-500">*</span>
           </label>
           <input
@@ -112,7 +112,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block font-bold">Enter your firm name (optional)</label>
+          <label className="block font-semibold text-[14px]">Enter your firm name (optional)</label>
           <input
             type="text"
             name="firmName"
@@ -158,7 +158,7 @@ const Step1: React.FC<Step1Props> = ({
       {/* Desktop View */}
       <form className="hidden lg:grid grid-cols-2 gap-6">
         <div>
-          <label className="block text-lg font-semibold">
+          <label className="block text-md font-semibold">
             Enter your first name<span className="text-red-500">*</span>
           </label>
           <input
@@ -177,7 +177,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block text-lg font-semibold">
+          <label className="block text-md font-semibold">
             Enter your last name<span className="text-red-500">*</span>
           </label>
           <input
@@ -196,7 +196,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block text-lg font-semibold">
+          <label className="block text-md font-semibold">
             Enter your phone number<span className="text-red-500">*</span>
           </label>
           <input
@@ -215,7 +215,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block text-lg font-semibold">
+          <label className="block text-md font-semibold">
             Enter your email<span className="text-red-500">*</span>
           </label>
           <input
@@ -234,7 +234,7 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block text-lg font-semibold">
+          <label className="block text-md font-semibold">
             Enter your firm name (optional)
           </label>
           <input

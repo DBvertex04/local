@@ -85,7 +85,7 @@ export default function Step2({
 
   return (
     <form className="space-y-5">
-      <div className="bg-[#E8EDF7] text-[#0052CC] text-sm font-medium p-4 rounded-md flex items-start space-x-2 mb-6">
+      <div className="bg-[#E8EDF7] text-[#2450A0] text-sm font-medium p-4 rounded-md flex items-start space-x-2 mb-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5 mt-[2px] flex-shrink-0 text-[#2450A0]"
@@ -100,7 +100,7 @@ export default function Step2({
             d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
           />
         </svg>
-        <p style={{ fontSize: "12px", fontWeight: "500" }}>
+        <p style={{ fontSize: "13px", fontWeight: "500" }}>
           All things chosen next are for leads that will be provided so choose
           carefully.
         </p>

@@ -4,10 +4,7 @@ import { useState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import Header2 from "@/components/Header2";
-import {
-  Building2, Home, LayoutGrid, Landmark, Tent,
-  Trees, MapPinned, Layers3, Mountain
-} from "lucide-react";
+
 
 export default function PropertyTypeSelection() {
   const options = [
@@ -89,7 +86,7 @@ export default function PropertyTypeSelection() {
                 className="font-semibold text-[20px] leading-[100%] tracking-[0]"
                 style={{ color: '#0A0909', fontWeight: '600' }}
               >
-                hoose Property Type would you like to sell?
+                Choose Property Type would you like to sell?
               </span>
             </h3>
 

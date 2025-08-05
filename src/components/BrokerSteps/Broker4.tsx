@@ -85,7 +85,7 @@ const Step4: React.FC<Step4Props> = ({
               className={`flex items-center gap-4 px-4 py-4 rounded-2xl border font-extrabold cursor-pointer transition-all ${
                 isSelected
                   ? "bg-[#E7ECF5] border-[#2450a0] text-[#2450a0]"
-                  : "bg-white border-[#E5E7EB] text-gray-700 hover:bg-[#f5faff]"
+                  : "bg-white border-[#E5E7EB] text-[#121828]/60 hover:bg-[#f5faff]"
               }`}
               style={{ borderWidth: "1.6px", maxWidth: "650px" }}
             >
