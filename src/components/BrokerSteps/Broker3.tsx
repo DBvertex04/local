@@ -45,7 +45,7 @@ const Step3: React.FC<Step3Props> = ({ formData, setFormData, handleNext, handle
       </h3>
 
       {/* Selected Tags */}
-      <div className="flex flex-wrap gap-2 border border-gray-300 rounded-xl p-2 min-h-[52px] mb-4">
+      <div className="flex flex-wrap gap-2 border border-gray-300 rounded-xl p-2 min-h-[52px] mb-4" style={{ maxWidth: "650px" }}>
         {selectedAreas.map((area) => (
           <div
             key={area}

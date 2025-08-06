@@ -165,68 +165,53 @@ export default function BrokerProfilePage() {
         rel="stylesheet"
       />
       <Header3 />
+      <div className="block lg:hidden pt-[130px] px-4">
+        <h2 className="text-2xl font-extrabold mt-10">Broker Profile</h2>
+        <p className="text-sm text-gray-500 mb-6">
+          Specializing in connecting buyers, sellers, and investors with the
+          right opportunities.
+        </p>
 
-      {/* <img
-        src="/bubble.png"
-        alt="Bubble 2"
-        className="absolute top-0 right-0 w-[120px] md:w-[190px] z-0 opacity-80"
-      />
-      <img
-        src="/bubble1.png"
-        alt="Bubble 1"
-        className="absolute top-0 right-0 w-[90px] md:w-[134px] z-10"
-      /> */}
+        <div className="relative grid grid-cols-4 gap-[40px] mb-6">
+          <div className="absolute top-[4px] left-[6px] right-[6px] h-1 bg-gray-300 z-0" />
+          {steps.map((step, index) => {
+            const isCompleted = index < currentStep; // ✅ already completed
+            const isCurrent = index === currentStep; // 🎯 current step
+            return (
+              <div
+                key={index}
+                className="relative z-10 flex flex-col items-start"
+              >
+                {/* ✅ Tick for completed steps */}
+                {isCompleted ? (
+                  <div className="w-5 h-5 rounded-full bg-[#2450A0] text-white flex items-center justify-center mb-1">
+                    <FaCheck size={10} />
+                  </div>
+                ) : (
+                  // ⭕ Circle for current or upcoming steps
+                  <div
+                    className={`rounded-full mb-1 border-4 ${
+                      isCurrent
+                        ? "w-4 h-4 border-[#2450A0] bg-white"
+                        : "w-3 h-3 border-gray-300 bg-gray-300"
+                    }`}
+                  />
+                )}
 
-      {/* Mobile Stepper */}
-      {/* Mobile Stepper */}
-<div className="block lg:hidden pt-[130px] px-4">
-  <h2 className="text-2xl font-extrabold mt-10">Broker Profile</h2>
-  <p className="text-sm text-gray-500 mb-6">
-    Specializing in connecting buyers, sellers, and investors with the
-    right opportunities.
-  </p>
-
-  <div className="relative grid grid-cols-4 gap-[40px] mb-6">
-    <div className="absolute top-[4px] left-[6px] right-[6px] h-1 bg-gray-300 z-0" />
-    {steps.map((step, index) => {
-      const isCompleted = index < currentStep; // ✅ already completed
-      const isCurrent = index === currentStep; // 🎯 current step
-      return (
-        <div
-          key={index}
-          className="relative z-10 flex flex-col items-start"
-        >
-          {/* ✅ Tick for completed steps */}
-          {isCompleted ? (
-            <div className="w-5 h-5 rounded-full bg-[#2450A0] text-white flex items-center justify-center mb-1">
-              <FaCheck size={10} />
-            </div>
-          ) : (
-            // ⭕ Circle for current or upcoming steps
-            <div
-              className={`rounded-full mb-1 border-4 ${
-                isCurrent
-                  ? "w-4 h-4 border-[#2450A0] bg-white"
-                  : "w-3 h-3 border-gray-300 bg-gray-300"
-              }`}
-            />
-          )}
-
-          <span
-            className={`text-[11px] font-semibold ${
-              isCompleted || isCurrent ? "text-[#2450A0]" : "text-black"
-            }`}
-          >
-            {step}
-          </span>
+                <span
+                  className={`text-[11px] font-semibold ${
+                    isCompleted || isCurrent ? "text-[#2450A0]" : "text-black"
+                  }`}
+                >
+                  {step}
+                </span>
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
 
-  {renderStep()}
-</div>
-
+        {renderStep()}
+      </div>
 
       {/* Desktop View */}
       <main className="hidden lg:block pt-[140px] px-4">
@@ -264,7 +249,7 @@ export default function BrokerProfilePage() {
                         alt={`Step ${i + 1}`}
                         width={24}
                         height={24}
-                        style={{width:"100px"}}
+                        style={{ width: "100px" }}
                       />
                     </div>
                     <p
@@ -297,7 +282,10 @@ export default function BrokerProfilePage() {
           </div>
 
           {/* Step Content */}
-          <div className="bg-white rounded-[35px] shadow-md p-10 mt-[30px]" style={{width: "1037px"}}>
+          <div
+            className="bg-white rounded-[35px] shadow-md p-10 mt-[30px]"
+            style={{ width: "1037px" }}
+          >
             <p className="text-sm font-medium text-gray-500">
               Step {currentStep + 1} / {steps.length}
             </p>

@@ -9,6 +9,14 @@
   --font-sans: 'Nunito Sans', sans-serif;
   --font-mono: monospace;
 }
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and other WebKit browsers */
+}
 
 @media (prefers-color-scheme: dark) {
   :root {

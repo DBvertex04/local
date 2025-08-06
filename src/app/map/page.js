@@ -1,20 +1,26 @@
 "use client";
-import { useState } from "react"; // 🔹 For state management
-import Image from "next/image"; // 🔹 For optimized images
-import { IoMdClose, IoIosArrowDown } from "react-icons/io"; // 🔹 Icons for UI
-import { FaHeart, FiHeart } from "react-icons/fi"; // 🔹 Heart icons for like
-import Header2 from "@/components/Header2"; // 🔹 Your custom header
-import Footer from "@/components/Footer"; // 🔹 Your custom footer
-import Link from "next/link"; // 🔹 For navigation
+import { useState } from "react"; 
+import Image from "next/image"; 
+import { IoMdClose, IoIosArrowDown } from "react-icons/io";
+import { FaHeart } from "react-icons/fa";
+import { FiHeart } from "react-icons/fi";
+import Header2 from "@/components/Header2";
+import Footer from "@/components/Footer";
 
 export default function PropertyWithMap() {
   // 🔸 State definitions
-  const [likedStates, setLikedStates] = useState(Array(6).fill(false)); // 🔹 Like states for 6 cards
-  const [sortOrder, setSortOrder] = useState(""); // 🔹 Sort order (asc/desc)
-  const [showDropdown, setShowDropdown] = useState(false); // 🔹 Sort dropdown visibility
-  const [location, setLocation] = useState(""); // 🔹 Location input
-  const [showMobileMap, setShowMobileMap] = useState(false); // 🔹 Mobile map toggle
-  const [showFilter, setShowFilter] = useState(false); // 🔹 Filter modal visibility
+  const [likedStates, setLikedStates] = useState(Array(6).fill(false)); 
+  const [sortOrder, setSortOrder] = useState(""); 
+  const [showSortDropdown, setShowSortDropdown] = useState(false); 
+  const [location, setLocation] = useState(""); 
+  const [showMobileMap, setShowMobileMap] = useState(false); 
+  const [activeFilterDropdown, setActiveFilterDropdown] = useState(null);
+  const [filters, setFilters] = useState({
+    forSale: "",
+    bhk: "",
+    sqft: [100, 5000],
+    bath: "",
+  });
 
   // 🔹 Calculate liked count
   const likedCount = likedStates.filter(Boolean).length;
@@ -26,7 +32,7 @@ export default function PropertyWithMap() {
     setLikedStates(updatedLikes);
   };
 
-  // 🔸 Property data (your 6 cards)
+  // 🔸 Property data
   const propertyData = [
     {
       price: 280000,
@@ -84,15 +90,61 @@ export default function PropertyWithMap() {
     },
   ];
 
-  // 🔹 Sort property data
-  const sortedData = [...propertyData].sort((a, b) => {
+  // 🔹 Filter and sort property data
+  const filteredData = propertyData.filter((property) => {
+    const matchesForSale = filters.forSale
+      ? property.ownerType === filters.forSale
+      : true;
+    const matchesBhk = filters.bhk
+      ? filters.bhk === "Any"
+        ? true
+        : filters.bhk === "2+ BHK"
+        ? property.bhk >= 2
+        : property.bhk === parseInt(filters.bhk)
+      : true;
+    const matchesSqft =
+      property.sqft >= filters.sqft[0] && property.sqft <= filters.sqft[1];
+    const matchesBath = filters.bath
+      ? filters.bath === "Any"
+        ? true
+        : filters.bath === "2+"
+        ? property.bath >= 2
+        : property.bath === parseInt(filters.bath)
+      : true;
+    return matchesForSale && matchesBhk && matchesSqft && matchesBath;
+  });
+
+  const sortedData = [...filteredData].sort((a, b) => {
     if (sortOrder === "asc") return a.price - b.price;
     if (sortOrder === "desc") return b.price - a.price;
     return 0;
   });
 
-  // 🔸 Filters for mobile and desktop
-  const filters = ["For Sale", "BHK", "Sqft.", "Bath", ""];
+  // 🔹 Handle filter changes
+  const handleFilterChange = (filterType, value) => {
+    setFilters((prev) => ({
+      ...prev,
+      [filterType]: value,
+    }));
+    setActiveFilterDropdown(null);
+  };
+
+  // 🔹 Clear specific filter
+  const clearFilter = (filterType) => {
+    setFilters((prev) => ({
+      ...prev,
+      [filterType]: filterType === "sqft" ? [100, 5000] : "",
+    }));
+    setActiveFilterDropdown(null);
+  };
+
+  // 🔸 Filter options
+  const filterOptions = {
+    "For Sale": ["By Owner", "By Dealer"],
+    BHK: ["Any", "1 BHK", "2 BHK", "2+ BHK"],
+    "Sqft.": "range",
+    Bath: ["Any", "1", "2", "2+"],
+  };
 
   return (
     <div className="text-gray-900 min-h-screen flex flex-col font-nunito">
@@ -101,33 +153,134 @@ export default function PropertyWithMap() {
 
       {/* 🔹 Main Content */}
       <div className="flex-grow mt-[150px]">
-        {/* 📱 Mobile Map View */}
+        {/* 🔹 Mobile Map View */}
         {showMobileMap ? (
-          <div className="block md:hidden mt-24 px-4">
-            {/* 🔹 Mobile Map Header with Back Button */}
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-bold">Map View</h2>
-              <button
-                onClick={() => setShowMobileMap(false)}
-                className="text-blue-600 text-sm font-semibold"
-              >
-                Back to List
+          <div className="block md:hidden px-4 mb-20">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center bg-white border border-gray-300 rounded-2xl px-3 py-2 shadow-sm w-[calc(100%-60px)]">
+                  <Image
+                    src="/locationblue.png"
+                    alt="Location"
+                    width={20}
+                    height={20}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="mx-2 text-black text-base bg-transparent outline-none flex-grow"
+                  />
+                  <IoMdClose
+                    className="text-gray-400 text-sm cursor-pointer ml-auto"
+                    onClick={() => setLocation("")}
+                  />
+                  <Image
+                    src="/global.png"
+                    alt="Globe"
+                    width={20}
+                    height={20}
+                    className="ml-2"
+                  />
+                </div>
+                <div className="w-12 h-12 bg-white border border-[#E5E5E5] rounded-2xl flex items-center justify-center">
+                  <div className="bg-gray-100 rounded-2xl px-2 py-1 flex flex-col items-center justify-center">
+                    <span className="text-xs font-semibold text-gray-800 leading-tight">
+                      {likedCount.toString().padStart(2, "0")}
+                    </span>
+                    {likedCount > 0 ? (
+                      <FaHeart className="text-[#2450A0] text-base mt-[2px]" />
+                    ) : (
+                      <FiHeart className="text-gray-400 text-base mt-[2px]" />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-between items-center relative">
+                <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap py-1">
+                  {/* Placeholder for filter options to maintain layout */}
+                  {Object.keys(filterOptions).map((filter, index) => (
+                    <div key={index} className="relative">
+                      <div
+                        className="flex items-center gap-1 px-3 py-1.5 bg-[#edf1fd] text-sm text-[#2b56b6] font-medium rounded-full flex-shrink-0 cursor-pointer opacity-0 pointer-events-none"
+                        onClick={() =>
+                          setActiveFilterDropdown(
+                            activeFilterDropdown === filter ? null : filter
+                          )
+                        }
+                      >
+                        {filter} <IoIosArrowDown />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="relative">
+                  <div
+                    className="bg-white border border-gray-300 rounded-2xl px-3 py-2 w-33 flex items-center gap-2 shadow-sm cursor-pointer"
+                    onClick={() => setShowSortDropdown(!showSortDropdown)}
+                  >
+                    <div className="flex items-center bg-gray-100 px-2 py-1 rounded-2xl">
+                      <p className="text-sm text-gray-700 whitespace-nowrap">
+                        Sort by
+                      </p>
+                      <IoIosArrowDown className="text-gray-500 text-base ml-1" />
+                    </div>
+                    <Image
+                      src="/arrow-swap.png"
+                      alt="Swap"
+                      width={16}
+                      height={16}
+                    />
+                  </div>
+                  {showSortDropdown && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-10">
+                      <button
+                        onClick={() => {
+                          setSortOrder("asc");
+                          setShowSortDropdown(false);
+                        }}
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+                      >
+                        Price: Low to High
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSortOrder("desc");
+                          setShowSortDropdown(false);
+                        }}
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+                      >
+                        Price: High to Low
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <Image
+              src="/maplocation.png"
+              alt="Map View"
+              width={150}
+              height={150}
+              className="w-full h-[500px] object-cover rounded-lg mt-8"
+            />
+            <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 block md:hidden">
+              <button onClick={() => setShowMobileMap(false)}>
+                <Image
+                  src="/listview.png"
+                  alt="List View"
+                  width={150}
+                  height={150}
+                  className="w-32"
+                />
               </button>
             </div>
-            {/* 🔹 Static Map Image */}
-            <Image
-              src="/maplocation.png" // 🖼️ Your map image
-              alt="Map View"
-              width={600}
-              height={800}
-              className="w-full h-[300px] object-cover rounded-lg"
-            />
           </div>
         ) : (
           <>
-            {/* 🖥️ Desktop Filters (Location, Like Counter, Filters, Sort) */}
-            <div className="hidden md:flex items-center justify-between gap-4 max-w-screen-xl mx-auto px-4 mt-4">
-              {/* 🔹 Location Input */}
+            {/* 🔹 Desktop Filters */}
+            <div className="hidden md:flex items-center max-w-screen-xl w-full mx-auto px-4 mt-4 space-x-4">
               <div className="flex items-center bg-white border border-gray-300 rounded-2xl px-4 py-2 shadow-sm flex-shrink-0 w-[500px]">
                 <Image
                   src="/locationblue.png"
@@ -154,8 +307,7 @@ export default function PropertyWithMap() {
                   className="ml-2"
                 />
               </div>
-              {/* 🔹 Like Counter */}
-              <div className="w-12 h-12 bg-white border border-[#E5E5E5] rounded-2xl flex items-center justify-center mr-[270px]">
+              <div className="w-12 h-12 bg-white border border-[#E5E5E5] rounded-2xl flex items-center justify-center">
                 <div className="bg-gray-100 rounded-2xl px-2 py-1 flex flex-col items-center justify-center">
                   <span className="text-xs font-semibold text-gray-800 leading-tight">
                     {likedCount.toString().padStart(2, "0")}
@@ -167,80 +319,161 @@ export default function PropertyWithMap() {
                   )}
                 </div>
               </div>
-              {/* 🔹 Filter Buttons (BHK, Bath, Sqft) */}
-              {filters.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-1 px-3 py-1.5 bg-[#edf1fd] text-sm text-[#2b56b6] font-medium rounded-full flex-shrink-0 cursor-pointer"
-                  onClick={() => setShowFilter(true)}
-                >
-                  {item} <IoIosArrowDown />
-                </div>
-              ))}
-              {/* 🔹 Sort Dropdown */}
-              <div className="relative">
-                <div
-                  className="bg-white border border-gray-300 rounded-2xl px-3 py-2 w-35 flex items-center gap-2 shadow-sm cursor-pointer"
-                  onClick={() => setShowDropdown(!showDropdown)}
-                >
-                  <div className="flex items-center bg-gray-100 px-2 py-1 rounded-2xl">
-                    <p className="text-sm text-gray-700 whitespace-nowrap">
-                      Sort by
-                    </p>
-                    <IoIosArrowDown className="text-gray-500 text-base ml-1" />
-                  </div>
-                  <Image
-                    src="/arrow-swap.png"
-                    alt="Swap"
-                    width={16}
-                    height={16}
-                  />
-                </div>
-                {showDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-10">
-                    <button
-                      onClick={() => {
-                        setSortOrder("asc");
-                        setShowDropdown(false);
-                      }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+              <div className="flex items-center gap-4 ml-auto relative">
+                {Object.keys(filterOptions).map((filter, index) => (
+                  <div key={index} className="relative">
+                    <div
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#edf1fd] text-sm text-[#2b56b6] font-medium rounded-full flex-shrink-0 cursor-pointer"
+                      onClick={() =>
+                        setActiveFilterDropdown(
+                          activeFilterDropdown === filter ? null : filter
+                        )
+                      }
                     >
-                      Price: Low to High
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSortOrder("desc");
-                        setShowDropdown(false);
-                      }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
-                    >
-                      Price: High to Low
-                    </button>
+                      {filter} <IoIosArrowDown />
+                    </div>
+                    {activeFilterDropdown === filter && (
+                      <div className="absolute right-0 top-10 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-10">
+                        <div className="p-4 space-y-3">
+                          {filter === "Sqft." ? (
+                            <div>
+                              <label className="text-sm font-semibold">
+                                Sqft Range: {filters.sqft[0]} -{" "}
+                                {filters.sqft[1] === 5000
+                                  ? "5000+"
+                                  : filters.sqft[1]}
+                              </label>
+                              <div className="flex flex-col gap-2 mt-2">
+                                <input
+                                  type="range"
+                                  min="100"
+                                  max="5000"
+                                  value={filters.sqft[0]}
+                                  onChange={(e) =>
+                                    setFilters((prev) => ({
+                                      ...prev,
+                                      sqft: [
+                                        parseInt(e.target.value),
+                                        Math.max(
+                                          parseInt(e.target.value),
+                                          filters.sqft[1]
+                                        ),
+                                      ],
+                                    }))
+                                  }
+                                  className="w-full"
+                                />
+                                <input
+                                  type="range"
+                                  min="100"
+                                  max="5000"
+                                  value={filters.sqft[1]}
+                                  onChange={(e) =>
+                                    setFilters((prev) => ({
+                                      ...prev,
+                                      sqft: [
+                                        Math.min(
+                                          filters.sqft[0],
+                                          parseInt(e.target.value)
+                                        ),
+                                        parseInt(e.target.value),
+                                      ],
+                                    }))
+                                  }
+                                  className="w-full"
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            filterOptions[filter].map((option) => (
+                              <label
+                                key={option}
+                                className="flex items-center space-x-2"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={filters[filter.toLowerCase()] === option}
+                                  onChange={() =>
+                                    handleFilterChange(filter.toLowerCase(), option)
+                                  }
+                                  className="accent-[#2450A0]"
+                                />
+                                <span>{option}</span>
+                              </label>
+                            ))
+                          )}
+                          <button
+                            onClick={() => clearFilter(filter.toLowerCase())}
+                            className="w-full bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 text-sm"
+                          >
+                            Clear Filter
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                )}
+                ))}
+                <div className="relative">
+                  <div
+                    className="bg-white border border-gray-300 rounded-2xl px-3 py-2 w-35 flex items-center gap-2 shadow-sm cursor-pointer"
+                    onClick={() => setShowSortDropdown(!showSortDropdown)}
+                  >
+                    <div className="flex items-center bg-gray-100 px-2 py-1 rounded-2xl">
+                      <p className="text-sm text-gray-700 whitespace-nowrap">
+                        Sort by
+                      </p>
+                      <IoIosArrowDown className="text-gray-500 text-base ml-1" />
+                    </div>
+                    <Image
+                      src="/arrow-swap.png"
+                      alt="Swap"
+                      width={16}
+                      height={16}
+                    />
+                  </div>
+                  {showSortDropdown && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-10">
+                      <button
+                        onClick={() => {
+                          setSortOrder("asc");
+                          setShowSortDropdown(false);
+                        }}
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+                      >
+                        Price: Low to High
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSortOrder("desc");
+                          setShowSortDropdown(false);
+                        }}
+                        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+                      >
+                        Price: High to Low
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* 🖥️ Desktop Layout: Map + Cards */}
+            {/* 🔹 Desktop Layout: Map + Cards */}
             <div className="hidden md:flex mt-8 mx-auto max-w-screen-xl px-4">
-              {/* 🗺️ Left: Sticky Map */}
               <div className="md:w-1/2 h-[calc(100vh-120px)] sticky top-[120px]">
                 <Image
-                  src="/maplocation.png" // 🖼️ Your map image
+                  src="/maplocation.png"
                   alt="Map"
                   width={600}
                   height={800}
-                  className="w-full h-full object-cover "
+                  className="w-full h-full object-cover"
                 />
               </div>
-
-              {/* 📦 Right: Scrollable Cards */}
-              <div className="md:w-1/2 overflow-y-auto h-[calc(100vh-120px)] px-4 py-6">
+              <div className="md:w-1/2 overflow-y-auto h-[calc(100vh-120px)] px-4 py-6 hide-scrollbar">
                 <div className="grid grid-cols-2 gap-2">
                   {sortedData.map((property, index) => (
                     <div
                       key={index}
-                      className="bg-white w-full shadow-md overflow-hidden"
+                      className="bg-white w-full shadow-md overflow-hidden rounded-2xl"
                     >
                       <div className="relative">
                         <Image
@@ -266,33 +499,33 @@ export default function PropertyWithMap() {
                             alt="like"
                             width={20}
                             height={20}
-                            className="w-10 h-10 transition-all duration-200"
+                            className="w-10 h-10 transition-all duration-200 mt-[200px]"
                           />
                         </button>
                       </div>
                       <div className="p-4">
                         <div className="flex justify-between items-center">
-                          <p className="text-lg font-extrabold text-black">
+                          <p className="text-lg font-extrabold text-black mt-[-30px]">
                             ${parseInt(property.price).toLocaleString("en-US")}
                           </p>
                         </div>
-                        <p className="text-sm text-gray-500 -mt-2">
+                        <p className="text-sm text-gray-500 -mt-1">
                           {property.ownerType}
                         </p>
                         <div className="flex flex-wrap gap-2 mt-3">
-                          <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700">
+                          <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700 rounded-full">
                             <span className="text-[#2b56b6]">
                               {property.bhk}
                             </span>{" "}
                             BHK
                           </span>
-                          <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700">
+                          <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700 rounded-full">
                             <span className="text-[#2b56b6]">
                               {property.bath}
                             </span>{" "}
                             Bath
                           </span>
-                          <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700">
+                          <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700 rounded-full">
                             <span className="text-[#2b56b6]">
                               {property.sqft}
                             </span>{" "}
@@ -316,12 +549,11 @@ export default function PropertyWithMap() {
               </div>
             </div>
 
-            {/* 📱 Mobile View: Property Cards + Map Toggle */}
-            <div className="md:hidden px-4 mt-32 mb-20">
-              {/* 🔹 Mobile Header */}
+            {/* 🔹 Mobile View: Property Cards + Map Toggle */}
+            <div className="md:hidden px-4 mb-20 hide-scrollbar">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center bg-white border border-gray-300 rounded-2xl px-3 py-2 shadow-sm">
+                  <div className="flex items-center bg-white border border-gray-300 rounded-2xl px-3 py-2 shadow-sm w-[calc(100%-60px)]">
                     <Image
                       src="/locationblue.png"
                       alt="Location"
@@ -333,10 +565,10 @@ export default function PropertyWithMap() {
                       placeholder="Enter location"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                      className="mx-2 text-black text-base bg-transparent outline-none"
+                      className="mx-2 text-black text-base bg-transparent outline-none flex-grow"
                     />
                     <IoMdClose
-                      className="text-gray-400 text-sm cursor-pointer"
+                      className="text-gray-400 text-sm cursor-pointer ml-auto"
                       onClick={() => setLocation("")}
                     />
                     <Image
@@ -348,32 +580,123 @@ export default function PropertyWithMap() {
                     />
                   </div>
                   <div className="w-12 h-12 bg-white border border-[#E5E5E5] rounded-2xl flex items-center justify-center">
-                    <div className="bg-gray-100 w-10 h-10 rounded-2xl px-1 py-1 flex flex-col items-center justify-center">
+                    <div className="bg-gray-100 rounded-2xl px-2 py-1 flex flex-col items-center justify-center">
                       <span className="text-xs font-semibold text-gray-800 leading-tight">
                         {likedCount.toString().padStart(2, "0")}
                       </span>
-                      <FiHeart className="text-[#2b56b6] text-base mt-[2px]" />
+                      {likedCount > 0 ? (
+                        <FaHeart className="text-[#2450A0] text-base mt-[2px]" />
+                      ) : (
+                        <FiHeart className="text-gray-400 text-base mt-[2px]" />
+                      )}
                     </div>
                   </div>
                 </div>
-
-                {/* 🔹 Mobile Filters */}
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center relative">
                   <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap py-1">
-                    {filters.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-1 px-3 py-1.5 bg-[#edf1fd] text-sm text-[#2b56b6] font-medium rounded-full flex-shrink-0 cursor-pointer"
-                        onClick={() => setShowFilter(true)}
-                      >
-                        {item} <IoIosArrowDown />
+                    {Object.keys(filterOptions).map((filter, index) => (
+                      <div key={index} className="relative">
+                        <div
+                          className="flex items-center gap-1 px-3 py-1.5 bg-[#edf1fd] text-sm text-[#2b56b6] font-medium rounded-full flex-shrink-0 cursor-pointer"
+                          onClick={() =>
+                            setActiveFilterDropdown(
+                              activeFilterDropdown === filter ? null : filter
+                            )
+                          }
+                        >
+                          {filter} <IoIosArrowDown />
+                        </div>
+                        {activeFilterDropdown === filter && (
+                          <div className="absolute left-0 top-10 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-10">
+                            <div className="p-4 space-y-3">
+                              {filter === "Sqft." ? (
+                                <div>
+                                  <label className="text-sm font-semibold">
+                                    Sqft Range: {filters.sqft[0]} -{" "}
+                                    {filters.sqft[1] === 5000
+                                      ? "5000+"
+                                      : filters.sqft[1]}
+                                  </label>
+                                  <div className="flex flex-col gap-2 mt-2">
+                                    <input
+                                      type="range"
+                                      min="100"
+                                      max="5000"
+                                      value={filters.sqft[0]}
+                                      onChange={(e) =>
+                                        setFilters((prev) => ({
+                                          ...prev,
+                                          sqft: [
+                                            parseInt(e.target.value),
+                                            Math.max(
+                                              parseInt(e.target.value),
+                                              filters.sqft[1]
+                                            ),
+                                          ],
+                                        }))
+                                      }
+                                      className="w-full"
+                                    />
+                                    <input
+                                      type="range"
+                                      min="100"
+                                      max="5000"
+                                      value={filters.sqft[1]}
+                                      onChange={(e) =>
+                                        setFilters((prev) => ({
+                                          ...prev,
+                                          sqft: [
+                                            Math.min(
+                                              filters.sqft[0],
+                                              parseInt(e.target.value)
+                                            ),
+                                            parseInt(e.target.value),
+                                          ],
+                                        }))
+                                      }
+                                      className="w-full"
+                                    />
+                                  </div>
+                                </div>
+                              ) : (
+                                filterOptions[filter].map((option) => (
+                                  <label
+                                    key={option}
+                                    className="flex items-center space-x-2"
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={
+                                        filters[filter.toLowerCase()] === option
+                                      }
+                                      onChange={() =>
+                                        handleFilterChange(
+                                          filter.toLowerCase(),
+                                          option
+                                        )
+                                      }
+                                      className="accent-[#2450A0]"
+                                    />
+                                    <span>{option}</span>
+                                  </label>
+                                ))
+                              )}
+                              <button
+                                onClick={() => clearFilter(filter.toLowerCase())}
+                                className="w-full bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 text-sm"
+                              >
+                                Clear Filter
+                              </button>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
                   <div className="relative">
                     <div
                       className="bg-white border border-gray-300 rounded-2xl px-3 py-2 w-33 flex items-center gap-2 shadow-sm cursor-pointer"
-                      onClick={() => setShowDropdown(!showDropdown)}
+                      onClick={() => setShowSortDropdown(!showSortDropdown)}
                     >
                       <div className="flex items-center bg-gray-100 px-2 py-1 rounded-2xl">
                         <p className="text-sm text-gray-700 whitespace-nowrap">
@@ -388,12 +711,12 @@ export default function PropertyWithMap() {
                         height={16}
                       />
                     </div>
-                    {showDropdown && (
+                    {showSortDropdown && (
                       <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-10">
                         <button
                           onClick={() => {
                             setSortOrder("asc");
-                            setShowDropdown(false);
+                            setShowSortDropdown(false);
                           }}
                           className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
                         >
@@ -402,7 +725,7 @@ export default function PropertyWithMap() {
                         <button
                           onClick={() => {
                             setSortOrder("desc");
-                            setShowDropdown(false);
+                            setShowSortDropdown(false);
                           }}
                           className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
                         >
@@ -413,13 +736,11 @@ export default function PropertyWithMap() {
                   </div>
                 </div>
               </div>
-
-              {/* 🔹 Mobile Property Cards (1 per row) */}
               <div className="grid grid-cols-1 gap-2 py-10">
                 {sortedData.map((property, index) => (
                   <div
                     key={index}
-                    className="bg-white w-full rounded-lg shadow-lg overflow-hidden relative"
+                    className="bg-white w-full rounded-2xl shadow-lg overflow-hidden relative"
                   >
                     <div className="relative">
                       <Image
@@ -445,15 +766,13 @@ export default function PropertyWithMap() {
                           alt="like"
                           width={20}
                           height={20}
-                          className="w-10 h-10 transition-all duration-200 mt-[200px]"
+                          className="w-10 h-10 transition-all duration-200 mt-[220px]"
                         />
                       </button>
                     </div>
                     <div className="p-4 space-y-1">
                       <h2 className="text-lg font-extrabold text-black">
                         ${parseInt(property.price).toLocaleString("en-US")}
-                        SUBJECT: Re: Complete Code for Merged Property and Map
-                        Layout with Specific Desktop Filter Arrangement
                       </h2>
                       <p className="text-xs text-gray-600">
                         {property.ownerType}
@@ -494,42 +813,7 @@ export default function PropertyWithMap() {
               </div>
             </div>
 
-            {/* 🔹 Filter Modal (Mobile) */}
-            {showFilter && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4 md:px-0">
-                <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
-                  <button
-                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-                    onClick={() => setShowFilter(false)}
-                  >
-                    <IoMdClose size={20} />
-                  </button>
-                  <h2 className="text-lg font-semibold mb-4">Filter Options</h2>
-                  <div className="space-y-3">
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" className="accent-[#2450A0]" />
-                      <span>2 BHK</span>
-                    </label>
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" className="accent-[#2450A0]" />
-                      <span>3 BHK</span>
-                    </label>
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" className="accent-[#2450A0]" />
-                      <span>Apartment</span>
-                    </label>
-                  </div>
-                  <button
-                    onClick={() => setShowFilter(false)}
-                    className="mt-6 w-full bg-[#2450A0] text-white py-2 rounded-md hover:bg-[#1f3f7f]"
-                  >
-                    Apply Filters
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* 📍 Mobile Floating Map View Button */}
+            {/* 🔹 Mobile Floating Map View Button */}
             <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 block md:hidden">
               <button onClick={() => setShowMobileMap(true)}>
                 <Image
@@ -544,9 +828,10 @@ export default function PropertyWithMap() {
           </>
         )}
       </div>
-
-      {/* 🔹 Footer */}
-      <Footer />
+      <div className="-mt-30">
+        {/* 🔹 Footer */}
+        <Footer />
+      </div>
     </div>
   );
 }

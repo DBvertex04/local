@@ -10,6 +10,7 @@ interface Step1Props {
     email: string;
     phone: string;
     firmName?: string;
+    officeAddress?: string;
     agreedToTerms: boolean;
   };
   formErrors: {
@@ -34,7 +35,7 @@ const Step1: React.FC<Step1Props> = ({
   return (
     <>
       {/* Mobile View */}
-      <form className="space-y-5 lg:hidden">
+      <form className="space-y-5 lg:hidden max-w-md mx-auto px-4">
         <div>
           <label className="block font-semibold text-[14px]">
             Enter your first name<span className="text-red-500">*</span>
@@ -46,7 +47,7 @@ const Step1: React.FC<Step1Props> = ({
             onChange={handleChange}
             className={`mt-1 w-full border ${
               formErrors.firstName ? "border-red-500" : "border-gray-300"
-            } rounded-2xl p-2`}
+            } rounded-2xl p-2 text-sm`}
             placeholder="Ex. Ramesh"
           />
           {formErrors.firstName && (
@@ -65,7 +66,7 @@ const Step1: React.FC<Step1Props> = ({
             onChange={handleChange}
             className={`mt-1 w-full border ${
               formErrors.lastName ? "border-red-500" : "border-gray-300"
-            } rounded-2xl p-2`}
+            } rounded-2xl p-2 text-sm`}
             placeholder="Ex. Sharma"
           />
           {formErrors.lastName && (
@@ -84,7 +85,7 @@ const Step1: React.FC<Step1Props> = ({
             onChange={handleChange}
             className={`mt-1 w-full border ${
               formErrors.phone ? "border-red-500" : "border-gray-300"
-            } rounded-2xl p-2`}
+            } rounded-2xl p-2 text-sm`}
             placeholder="Ex. +91 9876543210"
           />
           {formErrors.phone && (
@@ -103,7 +104,7 @@ const Step1: React.FC<Step1Props> = ({
             onChange={handleChange}
             className={`mt-1 w-full border ${
               formErrors.email ? "border-red-500" : "border-gray-300"
-            } rounded-2xl p-2`}
+            } rounded-2xl p-2 text-sm`}
             placeholder="ramesh@gmail.com"
           />
           {formErrors.email && (
@@ -112,15 +113,40 @@ const Step1: React.FC<Step1Props> = ({
         </div>
 
         <div>
-          <label className="block font-semibold text-[14px]">Enter your firm name (optional)</label>
+          <label className="block font-semibold text-[14px]">
+            Enter your firm name (optional)
+          </label>
           <input
             type="text"
             name="firmName"
             value={formData.firmName || ""}
             onChange={handleChange}
-            className="mt-1 w-full border border-gray-300 rounded-2xl p-2"
+            className="mt-1 w-full border border-gray-300 rounded-2xl p-2 text-sm"
             placeholder="Ex. Gurgaon Realty Hub"
           />
+        </div>
+
+        <div>
+          <label className="block font-semibold text-[14px]">
+            Enter Office Address (optional)
+          </label>
+          <div className="relative">
+            <input
+              type="text"
+              name="officeAddress"
+              value={formData.officeAddress || ""}
+              onChange={handleChange}
+              className="mt-1 w-full border border-gray-300 rounded-2xl p-2 pr-10 text-sm"
+              placeholder="Ex. DLF Cyber City, Tower 10, Phase II"
+            />
+            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              <img
+                src="/broker/location.webp"
+                alt="Location Icon"
+                style={{ width: "18px" }}
+              />
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -148,7 +174,7 @@ const Step1: React.FC<Step1Props> = ({
           <button
             type="button"
             onClick={handleNext}
-            className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full"
+            className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full max-w-xs"
           >
             Save and Next
           </button>
@@ -156,13 +182,13 @@ const Step1: React.FC<Step1Props> = ({
       </form>
 
       {/* Desktop View */}
-      <form className="hidden lg:grid grid-cols-2 gap-6">
+      <form className="hidden lg:grid grid-cols-2 gap-6 max-w-4xl mx-auto">
         <div>
           <label className="block text-md font-semibold">
             Enter your first name<span className="text-red-500">*</span>
           </label>
           <input
-          style={{width:'350px'}}
+            style={{ width: "350px" }}
             type="text"
             name="firstName"
             value={formData.firstName}
@@ -182,7 +208,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your last name<span className="text-red-500">*</span>
           </label>
           <input
-          style={{width:'350px'}}
+            style={{ width: "350px" }}
             type="text"
             name="lastName"
             value={formData.lastName}
@@ -202,7 +228,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your phone number<span className="text-red-500">*</span>
           </label>
           <input
-          style={{width:'350px'}}
+            style={{ width: "350px" }}
             type="tel"
             name="phone"
             value={formData.phone}
@@ -222,7 +248,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your email<span className="text-red-500">*</span>
           </label>
           <input
-          style={{width:'350px'}}
+            style={{ width: "350px" }}
             type="email"
             name="email"
             value={formData.email}
@@ -242,7 +268,7 @@ const Step1: React.FC<Step1Props> = ({
             Enter your firm name (optional)
           </label>
           <input
-          style={{width:'350px'}}
+            style={{ width: "350px" }}
             type="text"
             name="firmName"
             value={formData.firmName || ""}
@@ -251,26 +277,30 @@ const Step1: React.FC<Step1Props> = ({
             placeholder="Ex. Gurgaon Realty Hub"
           />
         </div>
-        <div className="relative w-fit">
-  <label className="block text-md font-semibold mb-1">
-    Enter Office Address (optional)
-  </label>
-  <div className="relative">
-    <input
-      type="text"
-      name="firmName"
-      value={formData.firmName || ""}
-      onChange={handleChange}
-      placeholder="Ex. DLF Cyber City, Tower 10, Phase II"
-      style={{ width: "350px" }}
-      className="w-full border border-gray-300 rounded-2xl p-2 pr-10" // Note pr-10
-    />
-    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-      <img src="/broker/location.webp" alt="" style={{width:'22px'}}/> {/* You can replace this with a real icon */}
-    </span>
-  </div>
-</div>
 
+        <div className="relative w-fit">
+          <label className="block text-md font-semibold mb-1">
+            Enter Office Address (optional)
+          </label>
+          <div className="relative">
+            <input
+              type="text"
+              name="officeAddress"
+              value={formData.officeAddress || ""}
+              onChange={handleChange}
+              placeholder="Ex. DLF Cyber City, Tower 10, Phase II"
+              style={{ width: "350px" }}
+              className="w-full border border-gray-300 rounded-2xl p-2 pr-10"
+            />
+            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              <img
+                src="/broker/location.webp"
+                alt="Location Icon"
+                style={{ width: "22px" }}
+              />
+            </span>
+          </div>
+        </div>
 
         <div className="col-span-2 flex items-center gap-2">
           <input
@@ -294,7 +324,8 @@ const Step1: React.FC<Step1Props> = ({
         )}
 
         <div className="col-span-2 text-right">
-          <button style={{marginRight:'147px'}}
+          <button
+            style={{ marginRight: "147px" }}
             type="button"
             onClick={handleNext}
             className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full md:w-[40%]"

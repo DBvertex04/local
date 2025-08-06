@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect } from "react";
 
 interface FacilityItem {
   label: string;
@@ -66,9 +67,16 @@ export default function Step2({
   handleNext,
   handleBack,
 }: Step2Props) {
+  useEffect(() => {
+    console.log("FormData:", formData);
+    console.log("FormErrors:", formErrors);
+    console.log("Furnishings:", furnishings);
+    console.log("Society Amenities:", societyAmenities);
+  }, [formData, formErrors]);
+
   const toggleFacility = (item: string) => {
     setFormData((prev) => {
-      const currentCommodities = prev.commodities || [];
+      const currentCommodities = Array.isArray(prev.commodities) ? prev.commodities : [];
       if (currentCommodities.includes(item)) {
         return {
           ...prev,
@@ -85,55 +93,56 @@ export default function Step2({
 
   return (
     <form className="space-y-5">
-      <div className="bg-[#E8EDF7] text-[#2450A0] text-sm font-medium p-4 rounded-md flex items-start space-x-2 mb-6">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 mt-[2px] flex-shrink-0 text-[#2450A0]"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+      <div className="flex items-start gap-2 bg-[#e7eef9] p-2 rounded-md w-full md:w-[600px]">
+        <Image
+          src="/broker/icon.png"
+          alt="Info Icon"
+          width={16}
+          height={16}
+          className="flex-shrink-0"
+        />
+        <p
+          style={{ fontSize: "13px", fontWeight: "500" }}
+          className="text-[#2450A0]"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
-          />
-        </svg>
-        <p style={{ fontSize: "13px", fontWeight: "500" }}>
           All things chosen next are for leads that will be provided so choose
           carefully.
         </p>
       </div>
 
       {/* 🔹 Residential Section */}
-      <div>
+      <div className="w-full">
         <h3 className="font-semibold mb-4 text-[15px]">
           Residential<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4">
           {furnishings.map((item) => (
             <button
               key={item.label}
               type="button"
               onClick={() => toggleFacility(item.label)}
-              className={`flex flex-col items-center justify-center rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[90px] sm:h-[100px] ${
+              className={`flex items-center justify-start rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[60px] sm:h-[100px] md:flex-col md:justify-center ${
                 formData.commodities.includes(item.label)
                   ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
                   : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
               }`}
             >
-              <img
-                src={item.icon}
-                alt={item.label}
-                className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px]"
-              />
+              <div className="w-[24px] sm:w-[35px] md:w-[44px] flex-shrink-0">
+                <Image
+                  src={item.icon}
+                  alt={item.label}
+                  width={24}
+                  height={24}
+                  className="w-[24px] h-[24px] sm:w-[35px] sm:h-[35px] md:w-[44px] md:h-[50px]"
+                />
+              </div>
               <span
-                className={`mt-2 sm:mt-3 font-medium ${
+                key={`label-${item.label}`}
+                className={`font-medium ml-2 md:ml-0 ${
                   formData.commodities.includes(item.label)
                     ? "text-[#0052CC]"
-                    : "text-[rgba(113,117,128,1)]"
-                } text-[10px] sm:text-[12px] md:text-[15px]`}
+                    : "text-[#51535a]"
+                } text-[11px] sm:text-[12px] md:text-[15px] md:mt-2 sm:mt-0`}
               >
                 {item.label}
               </span>
@@ -143,37 +152,38 @@ export default function Step2({
       </div>
 
       {/* 🔹 Commercial Section */}
-      <div>
+      <div className="w-full">
         <h3 className="font-semibold mb-4 text-[15px]">
           Commercial<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4">
           {societyAmenities.map((item) => (
             <button
               key={item.label}
               type="button"
               onClick={() => toggleFacility(item.label)}
-              className={`flex flex-col items-center justify-center rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[90px] sm:h-[100px] ${
+              className={`flex items-center justify-start rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[60px] sm:h-[100px] md:flex-col md:justify-center ${
                 formData.commodities.includes(item.label)
                   ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
                   : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
               }`}
             >
-              <img
-  src={item.icon}
-  alt={item.label}
-  className={`${
-    item.label === "Retail Shop"
-      ? "w-[35px] h-[35px]"
-      : "w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[50px] md:h-[50px]"
-  }`}
-/>
+              <div className="w-[24px] sm:w-[35px] md:w-[44px] flex-shrink-0">
+                <Image
+                  src={item.icon}
+                  alt={item.label}
+                  width={24}
+                  height={24}
+                  className="w-[24px] h-[24px] sm:w-[35px] sm:h-[35px] md:w-[44px] md:h-[50px]"
+                />
+              </div>
               <span
-                className={`mt-2 sm:mt-3 font-medium ${
+                key={`label-${item.label}`}
+                className={`font-medium ml-2 md:ml-0 ${
                   formData.commodities.includes(item.label)
                     ? "text-[#0052CC]"
-                    : "text-[rgba(113,117,128,1)]"
-                } text-[10px] sm:text-[12px] md:text-[15px]`}
+                    : "text-[#51535a]"
+                } text-[11px] sm:text-[12px] md:text-[15px] md:mt-2 sm:mt-0`}
               >
                 {item.label}
               </span>
