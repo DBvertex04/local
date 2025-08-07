@@ -74,3 +74,7 @@
     clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0% 100%);
   }
 }
+select {
+  scrollbar-width: thin;
+  scrollbar-color: #ef4444 #ef4444 ; /* red thumb, gray track */
+}
