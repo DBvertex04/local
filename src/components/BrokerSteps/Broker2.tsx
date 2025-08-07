@@ -115,7 +115,7 @@ export default function Step2({
         <h3 className="font-semibold mb-4 text-[15px]">
           Residential<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4" style={{width:'874px'}}>
           {furnishings.map((item) => (
             <button
               key={item.label}
@@ -156,7 +156,7 @@ export default function Step2({
         <h3 className="font-semibold mb-4 text-[15px]">
           Commercial<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4" style={{width:'874px'}}>
           {societyAmenities.map((item) => (
             <button
               key={item.label}
@@ -200,7 +200,7 @@ export default function Step2({
       )}
 
       {/* 🔻 Navigation Buttons */}
-      <div className="flex justify-between">
+      <div className="flex justify-between" style={{width:'874px'}}>
         <button
           type="button"
           onClick={handleBack}

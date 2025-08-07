@@ -111,7 +111,7 @@ const Step4: React.FC<Step4Props> = ({
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-between -mb-4" style={{marginTop:"20px"}}>
+      <div className="flex justify-between -mb-4" style={{marginTop:"20px",width:'874px'}}>
         <button
           type="button"
           onClick={handleBack}

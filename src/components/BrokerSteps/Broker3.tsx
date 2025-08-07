@@ -98,7 +98,7 @@ const Step3: React.FC<Step3Props> = ({ formData, setFormData, handleNext, handle
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-between " style={{marginTop:"20px"}}>
+      <div className="flex justify-between " style={{marginTop:"20px",width:'874px'}}>
         <button
           type="button"
           onClick={handleBack}
