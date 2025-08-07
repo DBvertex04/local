@@ -215,7 +215,7 @@ const [showImg1, setShowImg1] = useState(false);
       }}
       className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
     >
-      {doc}
+      <span style={{fontSize:'15px',fontWeight:'500',color:'#6e7381'}}>{doc}</span>
     </li>
   ))}
 </ul>
