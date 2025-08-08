@@ -207,16 +207,29 @@ const [showImg1, setShowImg1] = useState(false);
   `}</style>
 
   {documents.map((doc, index) => (
-    <li
-      key={index}
-      onClick={() => {
-        setSelected(doc);
-        setIsOpen(false);
-      }}
-      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-    >
-      <span style={{fontSize:'15px',fontWeight:'500',color:'#6e7381'}}>{doc}</span>
-    </li>
+  <li
+  key={index}
+  onClick={() => {
+    setSelected(doc);
+    setIsOpen(false);
+  }}
+  className="px-4 py-2 cursor-pointer"
+  style={{ transition: 'all 0.2s ease' }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = '#E7ECF5';
+    const span = e.currentTarget.querySelector("span");
+    if (span) span.style.color = '#2450A0';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = 'transparent';
+    const span = e.currentTarget.querySelector("span");
+    if (span) span.style.color = '#6e7381';
+  }}
+>
+  <span style={{ fontSize: '15px', fontWeight: '700', color: '#6e7381' }}>{doc}</span>
+</li>
+
+
   ))}
 </ul>
 
