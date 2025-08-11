@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
 
 interface FacilityItem {
   label: string;
@@ -67,16 +66,9 @@ export default function Step2({
   handleNext,
   handleBack,
 }: Step2Props) {
-  useEffect(() => {
-    console.log("FormData:", formData);
-    console.log("FormErrors:", formErrors);
-    console.log("Furnishings:", furnishings);
-    console.log("Society Amenities:", societyAmenities);
-  }, [formData, formErrors]);
-
   const toggleFacility = (item: string) => {
     setFormData((prev) => {
-      const currentCommodities = Array.isArray(prev.commodities) ? prev.commodities : [];
+      const currentCommodities = prev.commodities || [];
       if (currentCommodities.includes(item)) {
         return {
           ...prev,
@@ -94,12 +86,10 @@ export default function Step2({
   return (
     <form className="space-y-5">
       <div className="flex items-start gap-2 bg-[#e7eef9] p-2 rounded-md w-full md:w-[600px]">
-        <Image
+        <img
           src="/broker/icon.png"
           alt="Info Icon"
-          width={16}
-          height={16}
-          className="flex-shrink-0"
+          className="w-4 h-4 mt-[1px] flex-shrink-0"
         />
         <p
           style={{ fontSize: "13px", fontWeight: "500" }}
@@ -111,38 +101,35 @@ export default function Step2({
       </div>
 
       {/* 🔹 Residential Section */}
-      <div className="w-full">
+      <div className="w-full md:w-[840px]">
         <h3 className="font-semibold mb-4 text-[15px]">
           Residential<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4" style={{width:'874px'}}>
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           {furnishings.map((item) => (
             <button
               key={item.label}
               type="button"
               onClick={() => toggleFacility(item.label)}
-              className={`flex items-center justify-start rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[60px] sm:h-[100px] md:flex-col md:justify-center ${
-                formData.commodities.includes(item.label)
-                  ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
-                  : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
-              }`}
+              className={`flex flex-row md:flex-col items-center md:items-center gap-2 md:gap-0 rounded-lg p-2 sm:p-3 md:p-4 transition-all 
+          h-[60px] sm:h-[70px] md:h-[110px] 
+          ${
+            formData.commodities.includes(item.label)
+              ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
+              : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
+          }`}
             >
-              <div className="w-[24px] sm:w-[35px] md:w-[44px] flex-shrink-0">
-                <Image
-                  src={item.icon}
-                  alt={item.label}
-                  width={24}
-                  height={24}
-                  className="w-[24px] h-[24px] sm:w-[35px] sm:h-[35px] md:w-[44px] md:h-[50px]"
-                />
-              </div>
+              <img
+                src={item.icon}
+                alt={item.label}
+                className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[40px] md:h-[40px]"
+              />
               <span
-                key={`label-${item.label}`}
-                className={`font-medium ml-2 md:ml-0 ${
+                className={`font-medium text-left md:text-center ${
                   formData.commodities.includes(item.label)
                     ? "text-[#0052CC]"
-                    : "text-[#51535a]"
-                } text-[11px] sm:text-[12px] md:text-[15px] md:mt-2 sm:mt-0`}
+                    : "text-[rgba(113,117,128,1)]"
+                } text-[10px] sm:text-[13px] md:text-[15px]`}
               >
                 {item.label}
               </span>
@@ -152,38 +139,35 @@ export default function Step2({
       </div>
 
       {/* 🔹 Commercial Section */}
-      <div className="w-full">
+      <div className="w-full md:w-[840px] mt-6">
         <h3 className="font-semibold mb-4 text-[15px]">
           Commercial<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4" style={{width:'874px'}}>
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           {societyAmenities.map((item) => (
             <button
               key={item.label}
               type="button"
               onClick={() => toggleFacility(item.label)}
-              className={`flex items-center justify-start rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[60px] sm:h-[100px] md:flex-col md:justify-center ${
-                formData.commodities.includes(item.label)
-                  ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
-                  : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
-              }`}
+              className={`flex flex-row md:flex-col items-center md:items-center gap-2 md:gap-0 rounded-lg p-2 sm:p-3 md:p-4 transition-all 
+          h-[60px] sm:h-[70px] md:h-[110px] 
+          ${
+            formData.commodities.includes(item.label)
+              ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
+              : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
+          }`}
             >
-              <div className="w-[24px] sm:w-[35px] md:w-[44px] flex-shrink-0">
-                <Image
-                  src={item.icon}
-                  alt={item.label}
-                  width={24}
-                  height={24}
-                  className="w-[24px] h-[24px] sm:w-[35px] sm:h-[35px] md:w-[44px] md:h-[50px]"
-                />
-              </div>
+              <img
+                src={item.icon}
+                alt={item.label}
+                className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[40px] md:h-[40px]"
+              />
               <span
-                key={`label-${item.label}`}
-                className={`font-medium ml-2 md:ml-0 ${
+                className={`font-medium text-left md:text-center ${
                   formData.commodities.includes(item.label)
                     ? "text-[#0052CC]"
-                    : "text-[#51535a]"
-                } text-[11px] sm:text-[12px] md:text-[15px] md:mt-2 sm:mt-0`}
+                    : "text-[rgba(113,117,128,1)]"
+                } text-[10px] sm:text-[12px] md:text-[15px]`}
               >
                 {item.label}
               </span>
@@ -200,18 +184,24 @@ export default function Step2({
       )}
 
       {/* 🔻 Navigation Buttons */}
-      <div className="flex justify-between" style={{width:'874px'}}>
+      <div
+        className="flex justify-between w-[343px] md:w-[850px]"
+        style={{ marginTop: "18px" }}
+      >
+        {/* Back button — sirf desktop me dikhe */}
         <button
           type="button"
           onClick={handleBack}
-          className="bg-gray-300 text-gray-900 px-6 py-2 rounded-full w-[48%]"
+          className="hidden md:block bg-gray-300 text-gray-900 px-6 py-2 rounded-full w-[48%]"
         >
           Back
         </button>
+
+        {/* Save and Next — har screen pe dikhe */}
         <button
           type="button"
           onClick={handleNext}
-          className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-[48%]"
+          className="bg-[#2450A0] text-white px-6 py-2 rounded-full md:w-[48%] w-full"
         >
           Save and Next
         </button>

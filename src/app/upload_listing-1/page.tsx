@@ -90,11 +90,7 @@ export default function Uploadlisting() {
                   key={index}
                   src={`/upload_listing/${img}.png`}
                   alt={img}
-                  style={{
-                    width: "100%",
-                    borderRadius: "10px",
-                    objectFit: "cover",
-                  }}
+                  className="w-[120%] sm:w-full h-[120px] sm:h-[180px] rounded-[10px] object-cover"
                 />
               ))}
 
@@ -107,11 +103,7 @@ export default function Uploadlisting() {
                   <img
                     src={`/upload_listing/${overlayImage}.png`}
                     alt="img6"
-                    style={{
-                      width: "100%",
-                      borderRadius: "10px",
-                      objectFit: "cover",
-                    }}
+                    className="w-[120%] sm:w-full h-[120px] sm:h-[180px] rounded-[10px] object-cover"
                   />
                   <div
                     style={{
@@ -139,11 +131,7 @@ export default function Uploadlisting() {
                 <img
                   src={`/upload_listing/${overlayImage}.png`}
                   alt="img6"
-                  style={{
-                    width: "100%",
-                    borderRadius: "10px",
-                    objectFit: "cover",
-                  }}
+                  className="w-[120%] sm:w-full h-[120px] sm:h-[180px] rounded-[10px] object-cover"
                 />
               )}
 
@@ -154,11 +142,7 @@ export default function Uploadlisting() {
                     key={index}
                     src={`/upload_listing/${img}.png`}
                     alt={img}
-                    style={{
-                      width: "100%",
-                      borderRadius: "10px",
-                      objectFit: "cover",
-                    }}
+                    className="w-[120%] sm:w-full h-[120px] sm:h-[180px] rounded-[10px] object-cover"
                   />
                 ))}
             </div>

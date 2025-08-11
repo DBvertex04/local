@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import Image from "next/image";
-import Link from 'next/link';
+import Link from "next/link";
 import Header2 from "@/components/Header2";
-
 
 export default function PropertyTypeSelection() {
   const options = [
@@ -21,7 +20,7 @@ export default function PropertyTypeSelection() {
   const [error, setError] = useState("");
   const [selected, setSelected] = useState(0);
 
-  const handleNextClick = (e: { preventDefault: () => void; }) => {
+  const handleNextClick = (e: { preventDefault: () => void }) => {
     if (selectedOption === "Other" && otherText.trim() === "") {
       e.preventDefault();
       setError("Please enter the property type.");
@@ -58,42 +57,70 @@ export default function PropertyTypeSelection() {
 
       <Header2 />
 
-      <main className="pt-[120px] pb-12 flex justify-center relative z-10" style={{ top: '35px', paddingBottom: '120px' }}>
-        <div className="w-full max-w-[650px] px-4" style={{ maxWidth: '1090px' }}>
-          <h2 className="text-2xl font-bold">
-            <span style={{ color: '#000000', fontWeight: '700', fontSize: '24px', lineHeight: '29px' }}>
+      <main
+        className="pt-[120px] pb-12 flex justify-center relative z-10"
+        style={{ top: "35px", paddingBottom: "120px" }}
+      >
+        <div
+          className="w-full max-w-[650px] px-4"
+          style={{ maxWidth: "1090px" }}
+        >
+          <h2 className="text-2xl font-bold md:ml-[-110px]">
+            <span
+              style={{
+                color: "#000000",
+                fontWeight: "700",
+                fontSize: "24px",
+                lineHeight: "29px",
+              }}
+            >
               Property
-            </span>{' '}
-            <span style={{ color: '#2450A0', fontWeight: '700', fontSize: '24px', lineHeight: '29px' }}>
+            </span>{" "}
+            <span
+              style={{
+                color: "#2450A0",
+                fontWeight: "700",
+                fontSize: "24px",
+                lineHeight: "29px",
+              }}
+            >
               Type
             </span>
           </h2>
 
           <p
-            className="text-sm text-gray-500 mt-1 text-[15px]"
-            style={{ marginTop: '12px', color: 'rgba(102, 102, 102, 1)' }}
+            className="mt-1 md:ml-[-110px]"
+            style={{
+              marginTop: "12px",
+              color: "rgba(102, 102, 102, 1)",
+              fontSize: "16px",
+              fontWeight: "400",
+            }}
           >
-            Answer a few questions and get your no-obligation cash offer in as little as 3 minutes.
+            Answer a few questions and get your no-obligation cash offer in as{" "}
+            <span style={{ fontWeight: "600" }}>little as 3 minutes.</span>
           </p>
 
           <div className="bg-white rounded-2xl shadow-md mt-6 p-4">
             <h3
               className="text-lg font-semibold mb-4 border-l-4 pl-3 w-[313px] h-[65px] opacity-100"
-              style={{ color: 'rgba(36, 80, 160, 1)' }}
+              style={{ color: "rgba(36, 80, 160, 1)" }}
             >
               <span className="text-[#2450A0] text-2xl font-bold">C</span>
               <span
                 className="font-semibold text-[20px] leading-[100%] tracking-[0]"
-                style={{ color: '#0A0909', fontWeight: '600' }}
+                style={{ color: "#0A0909", fontWeight: "600" }}
               >
-                Choose Property Type would you like to sell?
+                hoose Property Type would you like to sell?
               </span>
             </h3>
 
             <div className="grid grid-cols-3 gap-3">
               {options.map((option, index) => {
                 const isLast = index === options.length - 1;
-                const isIncompleteLastRow = options.length % 3 !== 0 && index >= options.length - (options.length % 3);
+                const isIncompleteLastRow =
+                  options.length % 3 !== 0 &&
+                  index >= options.length - (options.length % 3);
 
                 return (
                   <button
@@ -104,50 +131,57 @@ export default function PropertyTypeSelection() {
                     }}
                     className={`
                       flex flex-col items-center justify-center rounded-xl border px-3 py-4 transition-all text-sm font-semibold
-                      ${selected === index
-                        ? 'bg-[#E7ECF5] border-[rgba(36,80,160,0.53)] text-[#2450A0]'
-                        : 'bg-[#F7F8FA] border-transparent text-gray-700 hover:border-blue-300'}
-                      ${isLast && isIncompleteLastRow && options.length % 3 === 1 ? 'col-span-1 col-start-2' : ''}
+                      ${
+                        selected === index
+                          ? "bg-[#E7ECF5] border-[rgba(36,80,160,0.53)] text-[#2450A0]"
+                          : "bg-[#F7F8FA] border-transparent text-gray-700 hover:border-blue-300"
+                      }
+                      ${
+                        isLast &&
+                        isIncompleteLastRow &&
+                        options.length % 3 === 1
+                          ? "col-span-1 col-start-2"
+                          : ""
+                      }
                     `}
                   >
                     <div className="mb-2">
                       <img src={option.image} alt="icon" />
                     </div>
-                    <span style={{ fontWeight: '500', fontSize: '15px' }}>{option.label}</span>
+                    <span style={{ fontWeight: "500", fontSize: "15px" }}>
+                      {option.label}
+                    </span>
                   </button>
                 );
               })}
             </div>
 
             {/* Show Other field only if selected */}
-           {selectedOption === "Other" && (
-  <div className="mt-6">
-    <label className="block mb-1 text-[16px] font-medium text-[#0A0909]">
-      Other <span className="text-red-500">*</span>
-    </label>
-    <input
-      type="text"
-      placeholder="If Select Other"
-      value={otherText}
-      onChange={(e) => setOtherText(e.target.value)}
-      className={`mt-1 w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 ${
-        error
-          ? "border-red-500 focus:ring-red-500"
-          : "border-gray-300 focus:ring-[#2450A0]"
-      }`}
-      style={{
-        width: '309px',
-        height: '50px',
-        borderRadius: '19px',
-        paddingTop: '13px',
-      }}
-    />
-    {error && (
-      <p className="text-red-500 text-sm mt-1">{error}</p>
-    )}
-  </div>
-)}
-
+            {selectedOption === "Other" && (
+              <div className="mt-6">
+                <label className="block mb-1 text-[16px] font-medium text-[#0A0909]">
+                  Other <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="If Select Other"
+                  value={otherText}
+                  onChange={(e) => setOtherText(e.target.value)}
+                  className={`mt-1 w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 ${
+                    error
+                      ? "border-red-500 focus:ring-red-500"
+                      : "border-gray-300 focus:ring-[#2450A0]"
+                  }`}
+                  style={{
+                    width: "309px",
+                    height: "50px",
+                    borderRadius: "19px",
+                    paddingTop: "13px",
+                  }}
+                />
+                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+              </div>
+            )}
           </div>
 
           <div className="text-right mt-4">
