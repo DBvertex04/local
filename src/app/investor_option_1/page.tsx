@@ -197,7 +197,7 @@ export default function BuilderOrInvestor() {
               className="block text-[15px] font-semibold text-gray-900 mb-1"
               style={{ fontSize: "16px" }}
             >
-              Select Plot Size<span className="text-red-500">*</span>
+              Select Plot Siz<span className="text-red-500">*</span>
             </label>
             <div className="flex items-center border border-[#E5E7EB] rounded-full px-4 py-3 bg-white" style={{borderRadius:'15px'}}>
               <input
