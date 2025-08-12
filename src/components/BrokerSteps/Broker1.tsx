@@ -35,7 +35,7 @@ const Step1: React.FC<Step1Props> = ({
   return (
     <>
       {/* Mobile View */}
-      <form className="space-y-5 lg:hidden max-w-md mx-auto px-4">
+      { <form className="space-y-5 lg:hidden max-w-md mx-auto px-4">
         <div>
           <label className="block font-semibold text-[14px]">
             Enter your first name<span className="text-red-500">*</span>
@@ -179,7 +179,8 @@ const Step1: React.FC<Step1Props> = ({
             Save and Next
           </button>
         </div>
-      </form>
+      </form> }
+      
 
       {/* Desktop View */}
       <form className="hidden lg:grid grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -339,3 +340,5 @@ const Step1: React.FC<Step1Props> = ({
 };
 
 export default Step1;
+
+

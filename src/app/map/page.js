@@ -4,7 +4,7 @@ import Image from "next/image";
 import { IoMdClose, IoIosArrowDown } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
-import Header3 from "@/components/Header3";
+import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 
 export default function PropertyWithMap() {
@@ -149,7 +149,7 @@ export default function PropertyWithMap() {
   return (
     <div className="text-gray-900 min-h-screen flex flex-col font-nunito">
       {/* 🔹 Header */}
-      <Header3 />
+      <Header2 />
 
       {/* 🔹 Main Content */}
       <div className="flex-grow mt-[150px]">

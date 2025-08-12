@@ -57,13 +57,22 @@ export default function PropertyDetail() {
 
       <main className="pt-[120px] pb-12 flex justify-center relative z-10" style={{ top: '35px', paddingBottom: '120px' }}>
         <div className="w-full px-4" style={{ maxWidth: '1090px' }}>
-          <h2 className="font-bold">
+          <h2 className="font-bold md:ml-[-110px]">
             <span style={{ color: 'rgba(0, 0, 0, 1)', fontSize: '24px', fontWeight: '700' }}>Property</span>
             <span className="text-[#2450A0]" style={{ fontSize: '24px', fontWeight: '700' }}> Details</span>
           </h2>
 
-          <p className="text-sm mt-1 text-[15px]" style={{ marginTop: '12px', color: 'rgba(102, 102, 102, 1)', fontWeight: '400', fontSize: '14px' }}>
-            Answer a few questions and get your no-obligation cash offer in as little as 3 minutes.
+          <p
+            className="mt-1 md:ml-[-110px]"
+            style={{
+              marginTop: "12px",
+              color: "rgba(102, 102, 102, 1)",
+              fontSize: "16px",
+              fontWeight: "400",
+            }}
+          >
+            Answer a few questions and get your no-obligation cash offer in as{" "}
+            <span style={{ fontWeight: "600" }}>little as 3 minutes.</span>
           </p>
 
           {/* Form Box */}

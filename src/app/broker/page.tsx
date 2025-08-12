@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
-import Header3 from "@/components/Header3";
+import Header2 from "@/components/Header2";
 import Step1 from "@/components/BrokerSteps/Broker1";
 import Step2 from "@/components/BrokerSteps/Broker2";
 import Step3 from "@/components/BrokerSteps/Broker3";
@@ -164,8 +164,18 @@ export default function BrokerProfilePage() {
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
       />
-      <Header3 />
+      <Header2 />
       <div className="block lg:hidden pt-[130px] px-4">
+        <div
+            className="w-[50px] h-[50px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white"
+            style={{ border: "solid #0000001C", borderRadius: "16px",marginTop:'30px' }}
+           >
+            <img
+              src="/facilities/call.png"
+              alt="Call Icon"
+              className="w-[29px] h-[29px]"
+            />
+          </div>
         <h2 className="text-2xl font-extrabold mt-10">Broker Profile</h2>
         <p className="text-sm text-gray-500 mb-6">
           Specializing in connecting buyers, sellers, and investors with the
