@@ -99,50 +99,80 @@ export default function Page1() {
           </p>
 
           {/* OTP Inputs */}
-          <form className="mt-8 space-y-8">
-            <div className="flex flex-col items-center space-y-8">
-              {/* OTP Boxes */}
-              <div className="flex gap-4 sm:gap-6 md:gap-8 flex-wrap justify-center">
-                {otp.map((digit, index) => (
-                  <input
-                    key={index}
-                    ref={(el) => {
-                      inputRefs.current[index] = el;
-                    }}
-                    type="text"
-                    maxLength={1}
-                    value={digit}
-                    placeholder="0"
-                    onChange={(e) =>
-                      handleChange(e.target.value.replace(/[^0-9]/g, ""), index)
-                    }
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    className={`w-[55px] h-[55px] sm:w-[60px] sm:h-[60px] text-center text-[18px] sm:text-[20px] font-semibold rounded-xl outline-none
-                      bg-[#F1F2F6] 
-                      placeholder:text-[18px] placeholder:font-medium placeholder:text-[#0000001A]
-                      ${
-                        digit
-                          ? "text-[#2450A0] border border-[#2450A0]"
-                          : "text-[#2450A0] border border-transparent"
-                      }
-                      focus:ring-1 focus:ring-[#2450A0] transition-all duration-200`}
-                  />
-                ))}
-              </div>
+         <form className="mt-8 space-y-8">
+  <div className="flex flex-col items-center space-y-[20px]">
+    {/* OTP Boxes */}
+    <div className="flex gap-6 sm:gap-6 md:gap-8 flex-wrap justify-center">
+      {otp.map((digit, index) => (
+        <input
+          key={index}
+          ref={(el) => {
+            inputRefs.current[index] = el;
+          }}
+          type="text"
+          maxLength={1}
+          value={digit}
+          placeholder="0"
+          onChange={(e) =>
+            handleChange(e.target.value.replace(/[^0-9]/g, ""), index)
+          }
+          onKeyDown={(e) => handleKeyDown(e, index)}
+          className={`w-[55px] h-[55px] sm:w-[60px] sm:h-[60px] text-center text-[18px] sm:text-[20px] font-semibold rounded-xl outline-none
+            bg-[#F1F2F6] 
+            placeholder:text-[18px] placeholder:font-medium placeholder:text-[#0000001A]
+            ${
+              digit
+                ? "text-[#2450A0] border border-[#2450A0]"
+                : "text-[#2450A0] border border-transparent"
+            }
+            focus:ring-1 focus:ring-[#2450A0] transition-all duration-200`}
+        />
+      ))}
+    </div>
 
-              {/* Verify Button */}
-              <div className="w-full flex justify-center">
-                <button
-                  type="button"
-                  className="bg-[#2450A0] py-3 rounded-full font-medium text-sm w-[450px] sm:w-[300px] md:w-[400px] lg:w-[567px]"
-                >
-                  <span className="text-[14px] font-medium text-white">
-                    Verify
-                  </span>
-                </button>
-              </div>
-            </div>
-          </form>
+    {/* Verify Button */}
+    <div className="w-full flex flex-col items-center">
+      <button
+        type="button"
+        className="
+          bg-[#2450A0] py-3 rounded-full font-medium text-sm
+          w-[332px]        /* mobile */
+          sm:w-[300px]     /* small devices */
+          md:w-[400px]     /* medium devices */
+          lg:w-[567px]     /* large devices */
+        "
+      >
+        <span className="text-[14px] font-medium text-white" style={{fontWeight:'100'}}>
+          VERIFY
+        </span>
+      </button>
+
+      {/* Resend OTP Timer */}
+      <p
+        className="text-center"
+        style={{
+          fontSize: "15px",
+          color: "#000000",
+          fontWeight: "500",
+          marginTop: "30px",
+        }}
+      >
+        Resend OTP in 12secs
+      </p>
+      <p
+        className="text-center"
+        style={{
+          fontSize: "14px",
+         color:'#4c4c4ccf',
+          marginTop: "4px",
+        }}
+      >
+        Resend OTP
+      </p>
+    </div>
+  </div>
+</form>
+
 
           {/* Next Button */}
           <div className="text-right mt-6">
