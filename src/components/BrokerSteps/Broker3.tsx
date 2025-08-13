@@ -88,7 +88,9 @@ const Step3: React.FC<Step3Props> = ({ formData, setFormData, handleNext, handle
           style={{padding:'7px',borderRadius:'3px'}}
             className={`w-3 h-3 rounded-full transition-all duration-200
               ${isSelected ? "bg-[#2450A0] shadow-[0_1px_6px_0_#c192f1]" : "bg-[#E5E7EB]"}`}
-          ></div>
+          >
+            
+          </div>
         </div>
       </div>
               <span className="text-sm font-bold uppercase">{area}</span>
