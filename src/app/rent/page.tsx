@@ -637,47 +637,61 @@ import Header2 from "@/components/Header2";
 import Step1 from "@/components/RentSteps/Rent1";
 import Step2 from "@/components/RentSteps/Rent2";
 import Step3 from "@/components/RentSteps/Rent3";
-import Step4 from "@/components/BrokerSteps/Broker4";
+import Step4 from "@/components/RentSteps/Rent4";
+import Step5 from "@/components/RentSteps/Rent5";
 
-// 1. FormData को Rent1 कंपोनेंट के अनुसार अपडेट किया गया
+
 interface FormData {
   location: string;
   propertyType: string;
   propertyName: string;
   bhkType: string;
-  commodities: string[]; // <-- यह ज़रूरी है
+  commodities: string[]; 
   price?: string;
+    expectedPrice?: string;
+  expectedDeposit?: string;
+  rentNegotiable?: boolean;
+  monthlyMaintenance?: string;
   availability?: string;
+  availableDate?: string;
+  availableTime?: string;
 }
 
-// 2. FormErrors इंटरफ़ेस में 'commodities' को जोड़ा गया
 interface FormErrors {
   location: boolean;
   propertyType: boolean;
   propertyName: boolean;
   bhkType: boolean;
-  commodities: boolean; // <-- यह ज़रूरी है
+  commodities: boolean; 
 }
 
 export default function BrokerProfilePage() {
   const [currentStep, setCurrentStep] = useState(0);
 
-  // 3. formData की प्रारंभिक स्टेट में 'commodities' को खाली ऐरे के रूप में जोड़ा गया
+
   const [formData, setFormData] = useState<FormData>({
     location: "",
     propertyType: "",
     propertyName: "",
     bhkType: "",
-    commodities: [], // <-- यह सबसे ज़रूरी बदलाव है
+    commodities: [], 
+      expectedPrice: "",
+  expectedDeposit: "",
+  rentNegotiable: false,
+  monthlyMaintenance: "Maintenance Included", 
+  availability: "Everyday", 
+  availableDate: "",
+  availableTime: "",
+
   });
 
-  // 4. formErrors की प्रारंभिक स्टेट को अपडेट किया गया
+  
   const [formErrors, setFormErrors] = useState<FormErrors>({
     location: false,
     propertyType: false,
     propertyName: false,
     bhkType: false,
-    commodities: false, // <-- यह ज़रूरी है
+    commodities: false, 
   });
 
   const steps = [
@@ -717,7 +731,7 @@ export default function BrokerProfilePage() {
       setFormErrors(errors);
       if (Object.values(errors).some((val) => val)) return;
     }
-    // 5. Step 2 (Rent2) के लिए वैलिडेशन जोड़ा गया
+  
     else if (currentStep === 1) {
       const errors = {
         ...formErrors,
@@ -758,7 +772,7 @@ export default function BrokerProfilePage() {
             formData={formData}
             setFormData={setFormData}
             formErrors={formErrors}
-            setFormErrors={setFormErrors} // <-- setFormErrors पास करना न भूलें
+            setFormErrors={setFormErrors} 
             handleNext={handleNext}
             handleBack={handleBack}
           />
@@ -781,11 +795,18 @@ export default function BrokerProfilePage() {
             handleBack={handleBack}
           />
         );
+          case 4:
+      return (
+        <Step5
+          formData={formData}
+          setFormData={setFormData}
+          handleBack={handleBack}
+        />
+      );
       default:
         return <div className="text-center py-10">Step Coming Soon</div>;
     }
   };
-  // --- आपके JSX और स्टाइल में कोई बदलाव नहीं किया गया है ---
   return (
     <div
       className="relative bg-gray-50 min-h-screen text-gray-900"
@@ -881,7 +902,7 @@ export default function BrokerProfilePage() {
                       } flex items-center justify-center`}
                     >
                       <Image
-                        src={`/step-icons/step${i + 1}${
+                        src={`/Rent-step/step${i + 1}${
                           isActiveOrCompleted ? "blue" : "gray"
                         }.svg`}
                         alt={`Step ${i + 1}`}

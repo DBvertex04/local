@@ -34,7 +34,7 @@
 //       />
 
 //       {/* Background */}
-     
+
 
 //       <main className=" pb-12 flex justify-center relative z-10">
 //         <div className="w-full px-4" style={{ maxWidth: "1000px" }}>
@@ -50,15 +50,15 @@
 
 
 //                 {/* Label */}
-               
-           
+
+
 //               </div>
 //             ))}
 //           </div>
 
 //           {/* Upload Images Section */}
 //           <div className="mt-6">
-//             <label className="text-[16px] font-semibold text-[#0A0909] block mb-2">
+//             <label className="text-[16px] font-bold text-[#0A0909] block mb-2"style={{ fontFamily: "Poppins, sans-serif" }}>
 //               Upload Images <span className="text-red-500">*</span>
 //             </label>
 
@@ -134,6 +134,7 @@
 //   );
 // }
 
+
 // "use client";
 
 // import { useState } from "react";
@@ -152,74 +153,151 @@
 //     });
 //   };
 
+//   const areaOptions = ["Everyday", "Weekday", "Weekend"];
+
 //   return (
 //     <div
-//       className="min-h-screen flex justify-center items-center bg-gray-50 p-4"
+//       className="relative text-gray-900 min-h-screen overflow-hidden bg-gray-50"
 //       style={{ fontFamily: "'Poppins', sans-serif" }}
 //     >
-//       <form
-//         onSubmit={handleSubmit}
-//         className="mt-8 bg-white p-6 rounded-xl shadow-sm w-full max-w-2xl"
-//       >
-//         <label className="block text-[16px] font-semibold text-[#0A0909] mb-2">
-//           Availability<span className="text-red-500">*</span>
-//         </label>
+//       <main className="pb-12 flex justify-center relative z-10">
+//         <div className="w-full px-4" style={{ maxWidth: "1090px" }}>
+//           <form
+//             onSubmit={handleSubmit}
+//             className="mt-8 bg-white p-6 rounded-xl shadow-sm w-full"
+//           >
+//             {/* Availability */}
+//             <label className="block text-[16px] font-semibold text-[#0A0909] mb-2"style={{ fontFamily: "Poppins, sans-serif" }}>
+//               Availability<span className="text-red-500">*</span>
+//             </label>
 
-//         {/* Availability Buttons */}
-//         <div className="flex justify-between gap-2 mb-4">
-//           {["Everyday", "Weekday", "Weekend"].map((label) => (
-//             <button
-//               type="button"
-//               key={label}
-//               onClick={() => setSelectedAvailability(label)}
-//               className={`flex-1 border rounded-full py-2 text-sm font-medium transition ${
-//                 selectedAvailability === label
-//                   ? "bg-blue-50 border-blue-500 text-blue-600"
-//                   : "bg-white border-gray-300 text-gray-500"
-//               }`}
-//             >
-//               {label}
-//             </button>
-//           ))}
+//             <div className="flex gap-4 w-full mb-6 flex-nowrap overflow-x-auto">
+//               {areaOptions.map((option) => {
+//                 const isSelected = selectedAvailability === option;
+//                 return (
+//                   <div
+//                     key={option}
+//                     onClick={() => setSelectedAvailability(option)}
+//                     className={`flex items-center gap-2 px-4 py-2 rounded-full border cursor-pointer transition-all text-sm font-medium
+//           ${isSelected
+//                         ? "bg-[#1218280D] border-[#2450A0] text-[#2450A0]"
+//                         : "bg-[#1218280D] border-gray-300 text-[#121828] hover:bg-[#f5faff]"
+//                       }`}
+//                   >
+//                     <div
+//                       className={`w-6 h-6 flex items-center justify-center rounded-[8px] border transition-all duration-200
+//             ${isSelected
+//                           ? "border-[#2450A0] bg-[#1218280D]"
+//                           : "border-gray-300 bg-white"
+//                         }`}
+//                     >
+//                       {isSelected && (
+//                         <div className="w-3 h-3 rounded-[4px] bg-[#2450A0]"></div>
+//                       )}
+//                     </div>
+//                     {option}
+//                   </div>
+//                 );
+//               })}
+//             </div>
+
+
+//             {/* Date Picker */}
+//             {/* <div className="mb-4">
+//               <label className="block text-[16px] font-semibold text-[#0A0909] mb-1">
+//                 Select Date<span className="text-red-500">*</span>
+//               </label>
+//               <input
+//                 type="date"
+//                 placeholder="06/07/2025"
+//                 value={selectedDate}
+//                 onChange={(e) => setSelectedDate(e.target.value)}
+//                 className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
+//               />
+//             </div> */}
+//             <div className="mb-4 relative">
+//               <label className="block text-[16px] font-semibold text-[#0A0909] mb-1"style={{ fontFamily: "Poppins, sans-serif" }}>
+//                 Select Date<span className="text-red-500">*</span>
+//               </label>
+
+//               <input
+//                 type="text"
+//                 placeholder="06/07/2025"
+//                 value={selectedDate}
+//                 onFocus={(e) => (e.target.type = "date")}
+//                 onBlur={(e) => {
+//                   if (!e.target.value) e.target.type = "text";
+//                 }}
+//                 onChange={(e) => setSelectedDate(e.target.value)}
+//                 className="w-full border border-gray-300 rounded-full px-4 py-2 pr-10 text-sm focus:outline-none"
+//               />
+
+//               <img
+//                 src="/calender.png" // public folder me PNG
+//                 alt="calendar"
+//                 className="absolute right-4 top-12 -translate-y-1/2 w-5 h-5 pointer-events-none"
+//               />
+//             </div>
+
+
+//             {/* Time Picker */}
+//             {/* <div className="mb-4">
+//               <label className="block text-[16px] font-semibold text-[#0A0909] mb-1">
+//                 Select Time<span className="text-red-500">*</span>
+//               </label>
+//               <input
+//                 placeholder="06:15.00"
+//                 type="time"
+//                 value={selectedTime}
+//                 onChange={(e) => setSelectedTime(e.target.value)}
+//                 className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
+//               />
+//             </div> */}
+//             <div className="mb-4 relative">
+//               <label className="block text-[16px] font-semibold text-[#0A0909] mb-1" style={{ fontFamily: "Poppins, sans-serif" }}>
+//                 Select Time<span className="text-red-500">*</span>
+//               </label>
+
+//               <input
+//                 type="text"
+//                 placeholder="06:15.00"
+//                 value={selectedTime}
+//                 onFocus={(e) => (e.target.type = "time")}
+//                 onBlur={(e) => {
+//                   if (!e.target.value) e.target.type = "text";
+//                 }}
+//                 onChange={(e) => setSelectedTime(e.target.value)}
+//                 className="w-full border border-gray-300 rounded-full px-4 py-2 pr-10 text-sm focus:outline-none"
+//               />
+
+//               <img
+//                 src="/timedate.png" // Public folder me apka clock PNG
+//                 alt="clock"
+//                 className="absolute right-4 top-12 -translate-y-1/2 w-5 h-5 pointer-events-none"
+//               />
+//             </div>
+
+
+//             {/* Save & Next Button */}
+//             <div className="text-right pt-5">
+//               <button
+//                 style={{ marginRight: "147px" }}
+//                 type="submit"
+//                 className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full md:w-[40%]"
+//               >
+//                 SAVE & NEXT
+//               </button>
+//             </div>
+//           </form>
 //         </div>
-
-//         {/* Date Picker */}
-//         <div className="mb-4">
-//           <label className="block text-[15px] font-semibold text-[#0A0909] mb-1">
-//             Select Date<span className="text-red-500">*</span>
-//           </label>
-//           <input
-//             type="date"
-//             value={selectedDate}
-//             onChange={(e) => setSelectedDate(e.target.value)}
-//             className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
-//           />
-//         </div>
-
-//         {/* Time Picker */}
-//         <div className="mb-4">
-//           <label className="block text-[15px] font-semibold text-[#0A0909] mb-1">
-//             Select Time<span className="text-red-500">*</span>
-//           </label>
-//           <input
-//             type="time"
-//             value={selectedTime}
-//             onChange={(e) => setSelectedTime(e.target.value)}
-//             className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
-//           />
-//         </div>
-
-//         {/* Save & Next Button */}
-//         <button
-//           type="submit"
-//           className="w-full bg-[#2450A0] text-white py-3 rounded-full text-sm font-semibold"
-//         >
-//           SAVE & NEXT
-//         </button>
-//       </form>
+//       </main>
 //     </div>
 //   );
 // }
+
+
+// AVAILBILITY
+
 "use client";
 import React, { useState } from "react";
 
@@ -230,14 +308,14 @@ const Step4: React.FC = () => {
   const [parking, setParking] = useState("Both");
   const [description, setDescription] = useState("");
 
-  const areaOptions = [
-    "SECTOR-7 EXT",
-    "SECTOR-5 (with part of-sec, 3 & 6)",
-    "HOUSING BOARD SEC-7",
-    "SECTOR-9",
-    "SECTOR-9A",
-    "SECTOR-10",
-  ];
+  // const areaOptions = [
+  //   "SECTOR-7 EXT",
+  //   "SECTOR-5 (with part of-sec, 3 & 6)",
+  //   "HOUSING BOARD SEC-7",
+  //   "SECTOR-9",
+  //   "SECTOR-9A",
+  //   "SECTOR-10",
+  // ];
 
   const toggleTenant = (tenant: string) => {
     if (tenant === "Anyone") {
@@ -261,88 +339,124 @@ const Step4: React.FC = () => {
   };
 
   return (
-    <form className="space-y-6 px-4 md:px-[200px] py-6">
+    <form className="space-y-6 px-4 md:px-[300px] py-6">
       {/* Preferred Areas */}
-     {/* Preferred Tenants */}
-<div>
-  <label className="block text-[16px] font-semibold mb-2">
-    Preferred Tenants <span className="text-red-500">*</span>
-  </label>
+      {/* Preferred Tenants */}
+      <div>
+        <label className="text-[#0A0909] text-[16px] font-bold mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>
+          Preferred Tenants <span className="text-red-500">*</span>
+        </label>
 
-  <div className="flex flex-wrap gap-3 w-full px-4 py-3">
-    {["Anyone", "Family", "Company", "Bachelor Female", "Bachelor Male"].map((tenant) => {
-      const isSelected = preferredTenants.includes(tenant);
-      return (
-        <div
-          key={tenant}
-          onClick={() => toggleTenant(tenant)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full border cursor-pointer transition-all
-            ${isSelected
-              ? "bg-[#E7ECF5] border-[#2450A0] text-[#2450A0]"
-              : "bg-white border-gray-300 text-gray-600 hover:bg-[#f5faff]"}`}
+        <div className="flex  text[14px] text-bold flex-wrap gap-8 w-full px-4 py-3" style={{ fontFamily: "Poppins, sans-serif" }}
         >
-          {/* Circle */}
-          <div
-            className={`w-4 h-4 rounded-full border flex items-center justify-center
-              ${isSelected ? "border-[#2450A0]" : "border-gray-400"}`}
-          >
-            {isSelected && (
-              <div className="w-2 h-2 rounded-full bg-[#2450A0]" />
-            )}
-          </div>
-          <span className="text-sm font-medium">{tenant}</span>
+          {["Anyone", "Family", "Company", "Bachelor Female", "Bachelor Male"].map((tenant) => {
+            const isSelected = preferredTenants.includes(tenant);
+            return (
+              <div
+                key={tenant}
+                onClick={() => toggleTenant(tenant)}
+                style={{ padding: '14px', borderRadius: '12px', }}
+                className={`flex items-center text[14px] text-bold gap-2 px-4 py-2 rounded-full border cursor-pointer transition-all
+            ${isSelected
+                    ? "bg-[#1218280D] border-[#2450A0] text-[#2450A0]"
+                    : "bg-[#1218280D] border-gray-300 text-[#121828] hover:bg-[#f5faff]"}`}
+              >
+                {/* Circle */}
+                <div
+                  onClick={() => (!isSelected)}
+                  className={`w-6 h-6 flex items-center justify-center rounded-[8px] border transition-all duration-200
+    ${isSelected ? "border-[#2450A0] bg-[#F0F4FF]" : "border-gray-300 bg-white"}
+  `}
+                >
+                  {isSelected && (
+                    <div className="w-3 h-3 rounded-[4px] bg-[#2450A0]"></div>
+                  )}
+                </div>
+
+                <span className="text-sm font-medium">{tenant}</span>
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
-</div>
+      </div>
 
 
       {/* Furnishing */}
       <div>
-        <label className="block text-[16px] font-semibold mb-2">
+        <label
+          className="text-[#0A0909] text-[16px] font-bold mb-2 block"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
           Furnishing <span className="text-red-500">*</span>
         </label>
-        <select
-          value={furnishing}
-          onChange={(e) => setFurnishing(e.target.value)}
-          className="w-full border border-gray-300 rounded-full px-4 py-3 focus:outline-none"
-        >
-          <option value="Fully-Furnished">Fully-Furnished</option>
-          <option value="Semi-Furnished">Semi-Furnished</option>
-          <option value="Unfurnished">Unfurnished</option>
-        </select>
+
+        <div className="relative w-full">
+          <select
+            value={furnishing}
+            onChange={(e) => setFurnishing(e.target.value)}
+            className="w-full border text-[#0A090966] border-gray-300 rounded-full px-4 py-3 pr-12 focus:outline-none appearance-none"
+          >
+            <option value="Fully-Furnished">Fully-Furnished</option>
+            <option value="Semi-Furnished">Semi-Furnished</option>
+            <option value="Unfurnished">Unfurnished</option>
+          </select>
+
+          {/* Arrow PNG */}
+          <img
+            src="/Vector.png" // make sure this is in /public folder
+            alt="arrow"
+            className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none w-4 h-2"
+          />
+        </div>
       </div>
+
 
       {/* Parking */}
       <div>
-        <label className="block text-[16px] font-semibold mb-2">
+        <label
+          className="text-[#0A0909] text-[16px] font-bold mb-2 block"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
           Parking <span className="text-red-500">*</span>
         </label>
-        <select
-          value={parking}
-          onChange={(e) => setParking(e.target.value)}
-          className="w-full border border-gray-300 rounded-full px-4 py-3 focus:outline-none"
-        >
-          <option value="None">None</option>
-          <option value="Car">Car</option>
-          <option value="Bike">Bike</option>
-          <option value="Both">Both</option>
-        </select>
+
+        <div className="relative w-full">
+          <select
+            value={parking}
+            onChange={(e) => setParking(e.target.value)}
+            className="w-full text-[#0A090966] border border-gray-300 rounded-full px-4 py-3 pr-12 focus:outline-none appearance-none"
+          >
+            <option value="None">None</option>
+            <option value="Car">Car</option>
+            <option value="Bike">Bike</option>
+            <option value="Both">Both</option>
+          </select>
+
+          {/* Arrow PNG */}
+          <img
+            src="/Vector.png" // make sure it's in /public folder
+            alt="arrow"
+            className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none w-4 h-2"
+          />
+        </div>
       </div>
+
 
       {/* Description */}
       <div>
-        <label className="block text-[16px] font-semibold mb-2">
+        <label className="text-[#0A0909] text-[16px] font-bold mb-2" style={{ fontFamily: "Poppins, sans-serif" }}
+        >
           Description <span className="text-red-500">*</span>
         </label>
-        <textarea
-          placeholder="Write A Message"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none"
-          rows={3}
-        />
+        <div className="relative w-full">
+          <textarea
+            placeholder="Write A Message"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none"
+            rows={3}
+          />
+        </div>
       </div>
 
       {/* Save & Next */}
@@ -350,7 +464,9 @@ const Step4: React.FC = () => {
         <button
           style={{ marginRight: "147px" }}
           type="submit"
-          className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full md:w-[40%]"
+
+          style={{ fontFamily: "Poppins, sans-serif" }}
+          className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full md:w-[40%] "
         >
           SAVE & NEXT
         </button>
