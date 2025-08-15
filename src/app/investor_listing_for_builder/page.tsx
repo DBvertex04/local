@@ -80,7 +80,17 @@ export default function InvestorListing() {
               alt="Call Icon"
               className="w-[29px] h-[29px]"
             />
-          </div>
+         </div>
+               <button className="relative px-6 py-2 rounded-full text-white font-semibold md:bottom-[0px] bottom-[47px]"
+  style={{
+    background: "linear-gradient(180deg, #2450A0 0%, #2450A0 100%)",
+   float:'right'
+  }}
+>
+  <span style={{ fontSize: "13px", fontWeight: 500, color: "#FFFFFF" }}>UPLOAD</span>
+</button> 
+
+         
 
           {/* Heading */}
           <h2 className="text-2xl font-bold mt-[30px]" style={{ color: "#000000", fontWeight: "700", fontSize: "24px", lineHeight: "29px" }}>
@@ -369,44 +379,72 @@ export default function InvestorListing() {
           </div>
           {/* Investor Card */}
 {/* Investor Card with Image Overlap */}
-<div className="relative inline-block mt-[50px]">
+<div className="flex flex-col md:flex-row flex-wrap ">
+  {/* Card 1 */}
+  <div className="relative w-full max-w-[550px] mt-[50px]">
   {/* Shape image */}
   <img
-    src="/collaboration/subtract.png"
-    alt="Card Shape"
-    className="block w-[550px] max-w-full"
-  />
+  src="/collaboration/subtract.png"
+  alt="Card Shape"
+  className="block w-[105%] h-[200px] md:h-auto"
+/>
+
 
   {/* Profile image */}
   <img
     src="/collaboration/avtaar1.png"
     alt="Profile"
-    className="
-      absolute
-      top-[-4px]
-      left-[43px] w-[78px] h-[77px]   /* mobile default */
-      md:left-[63px] md:w-[131px] md:h-[131px] /* desktop override */
-    "
+    className="absolute top-[-2%] left-[11%] w-[24%] h-auto"
   />
 
-  {/* Content text */}
-  <div className="absolute top-[35px] left-[234px]">
-    <h2 className="text-lg font-bold text-gray-900">Nisha Patel</h2>
+  {/* Content */}
+  <div className="absolute top-[18%] left-[43%] w-[50%]">
+    <h2
+      className="font-bold text-gray-900"
+      style={{ fontSize: '18px' }}
+    >
+      Nisha Patel
+    </h2>
 
     {/* Locations */}
-    <div className="flex items-center gap-1 text-gray-500 text-sm mt-1">
-      <img src="/collaboration/location.png" alt="loc" className="w-4 h-4" />
-      <span style={{ fontSize: '14px', fontWeight: '500', color: '#20202099' }}>
+    <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
         Manesar, HR
       </span>
     </div>
-    <div className="flex items-center gap-1 text-gray-500 text-sm">
-      <img src="/collaboration/location.png" alt="loc" className="w-4 h-4" />
-      <span style={{ fontSize: '14px', fontWeight: '500', color: '#20202099' }}>
+
+    <div className="flex items-center gap-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
         Sohna, HR
         <span
-          className="text-blue-500 ml-1"
-          style={{ fontSize: '11px', color: '#2450A0', fontWeight: '500' }}
+          className="ml-[0.5vw]"
+          style={{
+            fontSize: 'clamp(11px, 1.4vw, 11px)',
+            color: '#2450A0',
+            fontWeight: '500',
+          }}
         >
           more
         </span>
@@ -414,19 +452,571 @@ export default function InvestorListing() {
     </div>
 
     {/* Buttons */}
-    <div className="flex gap-3 mt-4">
-      <button className="px-4 py-2 rounded-full bg-gray-100 text-gray-800 font-semibold text-sm">
-        <span style={{ color: '#121828', fontSize: '14px' }}>SEE PROFILE</span>
+    <div className="flex gap-[1vw] mt-[1.5vw]">
+      <button
+        className="rounded-full bg-gray-100 font-semibold"
+        style={{
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#121828',
+        }}
+      >
+        SEE PROFILE
       </button>
       <button
-        className="px-4 py-2 rounded-full text-blue-500 font-semibold text-sm"
-        style={{ border: 'solid #2450A0 1px' }}
+        className="rounded-full font-semibold"
+        style={{
+          border: 'solid #2450A0 1px',
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#2450A0',
+        }}
       >
-        <span style={{ color: '#2450A0', fontSize: '14px' }}>CONTACT</span>
+        CONTACT
       </button>
     </div>
   </div>
 </div>
+
+  {/* Card 2 */}
+ <div className="relative w-full max-w-[550px] mt-[0px] md:mt-[50px] ">
+  {/* Shape image */}
+  <img
+  src="/collaboration/subtract.png"
+  alt="Card Shape"
+  className="block w-[105%] h-[200px] md:h-auto"
+/>
+
+
+  {/* Profile image */}
+  <img
+    src="/collaboration/avtaar2.png"
+    alt="Profile"
+    className="absolute top-[-2%] left-[11%] w-[24%] h-auto"
+  />
+
+  {/* Content */}
+  <div className="absolute top-[18%] left-[43%] w-[50%]">
+    <h2
+      className="font-bold text-gray-900"
+      style={{ fontSize: '18px' }}
+    >
+      Dipak Joshi
+    </h2>
+
+    {/* Locations */}
+    <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(12px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+       Budget : <span style={{fontSize:'14px',color:'#2450A0',fontWeight:'600'}}>₹ 2cr</span>
+      </span>
+    </div>
+    <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+       Sector 49, GGN
+      </span>
+    </div>
+      
+    <div className="flex items-center gap-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+        Udyog Vihar, HR
+        <span
+          className="ml-[0.5vw]"
+          style={{
+            fontSize: 'clamp(11px, 1.4vw, 11px)',
+            color: '#2450A0',
+            fontWeight: '500',
+          }}
+        >
+          more
+        </span>
+      </span>
+    </div>
+
+    {/* Buttons */}
+    <div className="flex gap-[1vw] mt-[1.5vw]">
+      <button
+        className="rounded-full bg-gray-100 font-semibold"
+        style={{
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#121828',
+        }}
+      >
+        SEE PROFILE
+      </button>
+      <button
+        className="rounded-full font-semibold"
+        style={{
+          border: 'solid #2450A0 1px',
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#2450A0',
+        }}
+      >
+        CONTACT
+      </button>
+    </div>
+  </div>
+</div>
+
+  {/* Card 3 */}
+  <div className="relative w-full max-w-[550px]">
+  {/* Shape image */}
+  <img
+  src="/collaboration/subtract.png"
+  alt="Card Shape"
+  className="block w-[105%] h-[200px] md:h-auto"
+/>
+
+
+  {/* Profile image */}
+  <img
+    src="/collaboration/avtaar3.png"
+    alt="Profile"
+    className="absolute top-[-2%] left-[11%] w-[24%] h-auto"
+  />
+
+  {/* Content */}
+  <div className="absolute top-[18%] left-[43%] w-[50%]">
+    <h2
+      className="font-bold text-gray-900"
+      style={{ fontSize: '18px' }}
+    >
+      Akhil Darji
+    </h2>
+
+    {/* Locations */}
+     <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(12px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+       Budget : <span style={{fontSize:'14px',color:'#2450A0',fontWeight:'600'}}>₹ 1cr</span>
+      </span>
+    </div>
+    <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+        Rewari, HR
+      </span>
+    </div>
+
+    <div className="flex items-center gap-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+        Faridabad, HR
+        <span
+          className="ml-[0.5vw]"
+          style={{
+            fontSize: 'clamp(11px, 1.4vw, 11px)',
+            color: '#2450A0',
+            fontWeight: '500',
+          }}
+        >
+          more
+        </span>
+      </span>
+    </div>
+
+    {/* Buttons */}
+    <div className="flex gap-[1vw] mt-[1.5vw]">
+      <button
+        className="rounded-full bg-gray-100 font-semibold"
+        style={{
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#121828',
+        }}
+      >
+        SEE PROFILE
+      </button>
+      <button
+        className="rounded-full font-semibold"
+        style={{
+          border: 'solid #2450A0 1px',
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#2450A0',
+        }}
+      >
+        CONTACT
+      </button>
+    </div>
+  </div>
+</div>
+<div className="relative w-full max-w-[550px]">
+  {/* Shape image */}
+  <img
+  src="/collaboration/subtract.png"
+  alt="Card Shape"
+  className="block w-[105%] h-[200px] md:h-auto"
+/>
+
+
+  {/* Profile image */}
+  <img
+    src="/collaboration/avtaar4.png"
+    alt="Profile"
+    className="absolute top-[-2%] left-[11%] w-[24%] h-auto"
+  />
+
+  {/* Content */}
+  <div className="absolute top-[18%] left-[43%] w-[50%]">
+    <h2
+      className="font-bold text-gray-900"
+      style={{ fontSize: '18px' }}
+    >
+      Riya Vakil
+    </h2>
+
+    {/* Locations */}
+     
+    <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+        Rewari, HR
+      </span>
+    </div>
+
+    <div className="flex items-center gap-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+        IMT Manesar, HR
+        <span
+          className="ml-[0.5vw]"
+          style={{
+            fontSize: 'clamp(11px, 1.4vw, 11px)',
+            color: '#2450A0',
+            fontWeight: '500',
+          }}
+        >
+          more
+        </span>
+      </span>
+    </div>
+
+    {/* Buttons */}
+    <div className="flex gap-[1vw] mt-[1.5vw]">
+      <button
+        className="rounded-full bg-gray-100 font-semibold"
+        style={{
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#121828',
+        }}
+      >
+        SEE PROFILE
+      </button>
+      <button
+        className="rounded-full font-semibold"
+        style={{
+          border: 'solid #2450A0 1px',
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#2450A0',
+        }}
+      >
+        CONTACT
+      </button>
+    </div>
+  </div>
+</div>
+<div className="relative w-full max-w-[550px]">
+  {/* Shape image */}
+  <img
+  src="/collaboration/subtract.png"
+  alt="Card Shape"
+  className="block w-[105%] h-[200px] md:h-auto"
+/>
+
+
+  {/* Profile image */}
+  <img
+    src="/collaboration/avtaar5.png"
+    alt="Profile"
+    className="absolute top-[-2%] left-[11%] w-[24%] h-auto"
+  />
+
+  {/* Content */}
+  <div className="absolute top-[18%] left-[43%] w-[50%]">
+    <h2
+      className="font-bold text-gray-900"
+      style={{ fontSize: '18px' }}
+    >
+      Ayan Khan
+    </h2>
+
+    {/* Locations */}
+     <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(12px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+       Budget : <span style={{fontSize:'14px',color:'#2450A0',fontWeight:'600'}}>₹ 2cr</span>
+      </span>
+    </div>
+    <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+       Dwarka, DL
+      </span>
+    </div>
+
+    <div className="flex items-center gap-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+       Sector 56, GGN
+        <span
+          className="ml-[0.5vw]"
+          style={{
+            fontSize: 'clamp(11px, 1.4vw, 11px)',
+            color: '#2450A0',
+            fontWeight: '500',
+          }}
+        >
+          more
+        </span>
+      </span>
+    </div>
+
+    {/* Buttons */}
+    <div className="flex gap-[1vw] mt-[1.5vw]">
+      <button
+        className="rounded-full bg-gray-100 font-semibold"
+        style={{
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#121828',
+        }}
+      >
+        SEE PROFILE
+      </button>
+      <button
+        className="rounded-full font-semibold"
+        style={{
+          border: 'solid #2450A0 1px',
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#2450A0',
+        }}
+      >
+        CONTACT
+      </button>
+    </div>
+  </div>
+</div>
+<div className="relative w-full max-w-[550px]">
+  {/* Shape image */}
+  <img
+  src="/collaboration/subtract.png"
+  alt="Card Shape"
+  className="block w-[105%] h-[200px] md:h-auto"
+/>
+
+
+  {/* Profile image */}
+  <img
+    src="/collaboration/avtaar6.png"
+    alt="Profile"
+    className="absolute top-[-2%] left-[11%] w-[24%] h-auto"
+  />
+
+  {/* Content */}
+  <div className="absolute top-[18%] left-[43%] w-[50%]">
+    <h2
+      className="font-bold text-gray-900"
+      style={{ fontSize: '18px' }}
+    >
+      Abijeet Parmar
+    </h2>
+
+    {/* Locations */}
+     <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(12px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+       Budget : <span style={{fontSize:'14px',color:'#2450A0',fontWeight:'600'}}>₹ 1cr</span>
+      </span>
+    </div>
+    <div className="flex items-center gap-[0.5vw] mt-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+        Kadarpur, HR
+      </span>
+    </div>
+
+    <div className="flex items-center gap-[0.5vw]">
+      <img
+        src="/collaboration/location.png"
+        alt="loc"
+        className="w-[clamp(10px,3vw,16px)] h-auto"
+      />
+      <span
+        className="font-medium"
+        style={{
+          fontSize: 'clamp(14px, 1.8vw, 14px)',
+          color: '#20202099',
+        }}
+      >
+        Pataudi, HR
+        <span
+          className="ml-[0.5vw]"
+          style={{
+            fontSize: 'clamp(11px, 1.4vw, 11px)',
+            color: '#2450A0',
+            fontWeight: '500',
+          }}
+        >
+          more
+        </span>
+      </span>
+    </div>
+
+    {/* Buttons */}
+    <div className="flex gap-[1vw] mt-[1.5vw]">
+      <button
+        className="rounded-full bg-gray-100 font-semibold"
+        style={{
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#121828',
+        }}
+      >
+        SEE PROFILE
+      </button>
+      <button
+        className="rounded-full font-semibold"
+        style={{
+          border: 'solid #2450A0 1px',
+          padding: '0.8vw 1.5vw',
+          fontSize: 'clamp(11px, 1.4vw, 11px)',
+          color: '#2450A0',
+        }}
+      >
+        CONTACT
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
 
 
 
