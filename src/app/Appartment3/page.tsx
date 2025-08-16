@@ -513,14 +513,14 @@ const EVChargingIcon = () => (
 
 export default function Details() {
     const properties = [
-        { id: 1, img: "/Appartmentnew.png", price: "$280,000", owner: "By Owner", verified: true, bhk: "2 ", bath: "2 ", sqft: "24 ", location: "1030 Spruce St, Aurora, IL, 60506" },
-        { id: 2, img: "/Appartmentnew.png", price: "$450,000", owner: "By Agent", verified: false, bhk: "3 ", bath: "3 ", sqft: "36 ", location: "221B Baker Street, London, UK" },
-        { id: 3, img: "/Appartmentnew.png", price: "$320,000", owner: "By Owner", verified: true, bhk: "1 ", bath: "1 ", sqft: "18 ", location: "5th Ave, New York, NY 10011" },
-        { id: 4, img: "/Appartmentnew.png", price: "$600,000", owner: "By Agent", verified: true, bhk: "4 ", bath: "4 ", sqft: "48 ", location: "90210 Beverly Hills, CA" },
-        { id: 5, img: "/Appartmentnew.png", price: "$750,000", owner: "By Owner", verified: true, bhk: "5 ", bath: "5 ", sqft: "60 ", location: "1600 Pennsylvania Avenue NW, Washington, DC" },
-        { id: 6, img: "/Appartmentnew.png", price: "$150,000", owner: "By Agent", verified: false, bhk: "1 ", bath: "1 ", sqft: "15 ", location: "10 Downing Street, London, UK" },
-        { id: 7, img: "/Appartmentnew.png", price: "$980,000", owner: "By Owner", verified: true, bhk: "6 ", bath: "7 ", sqft: "80 ", location: "Eiffel Tower, Champ de Mars, Paris" },
-        { id: 8, img: "/Appartmentnew.png", price: "$420,000", owner: "By Owner", verified: true, bhk: "3 ", bath: "2 ", sqft: "30 ", location: "Burj Khalifa, Dubai, UAE" },
+        { id: 1, img: "/Appartmentnew.png", price: "$280,000", owner: "By Owner", verified: true, name: "Flat 1",name2: "Flat 1", bhk: "2 ", bath: "2 ", sqft: "24 ", location: "1030 Spruce St, Aurora, IL, 60506" },
+        { id: 2, img: "/Appartmentnew.png", price: "$450,000", owner: "By Agent", verified: false, name: "Flat 1",name2: "Flat 1", bhk: "3 ", bath: "3 ", sqft: "36 ", location: "221B Baker Street, London, UK" },
+        { id: 3, img: "/Appartmentnew.png", price: "$320,000", owner: "By Owner", verified: true, name: "Flat 1",name2: "Flat 1", bhk: "1 ", bath: "1 ", sqft: "18 ", location: "5th Ave, New York, NY 10011" },
+        { id: 4, img: "/Appartmentnew.png", price: "$600,000", owner: "By Agent", verified: true, name: "Flat 1",name2: "Flat 1", bhk: "4 ", bath: "4 ", sqft: "48 ", location: "90210 Beverly Hills, CA" },
+        { id: 5, img: "/Appartmentnew.png", price: "$750,000", owner: "By Owner", verified: true, name: "Flat 1",name2: "Flat 1", bhk: "5 ", bath: "5 ", sqft: "60 ", location: "1600 Pennsylvania Avenue NW, Washington, DC" },
+        { id: 6, img: "/Appartmentnew.png", price: "$150,000", owner: "By Agent", verified: false, name: "Flat 1",name2: "Flat 1", bhk: "1 ", bath: "1 ", sqft: "15 ", location: "10 Downing Street, London, UK" },
+        { id: 7, img: "/Appartmentnew.png", price: "$980,000", owner: "By Owner", verified: true, name: "Flat 1",name2: "Flat 1", bhk: "6 ", bath: "7 ", sqft: "80 ", location: "Eiffel Tower, Champ de Mars, Paris" },
+        { id: 8, img: "/Appartmentnew.png", price: "$420,000", owner: "By Owner", verified: true, name: "Flat 1",name2: "Flat 1", bhk: "3 ", bath: "2 ", sqft: "30 ", location: "Burj Khalifa, Dubai, UAE" },
     ];
 
     const amenities = [
@@ -560,6 +560,22 @@ export default function Details() {
         if (rentIndex > 0) {
             setRentIndex(rentIndex - 1);
         }
+    };
+       const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
+    const [likedItems1, setLikedItems1] = useState<{ [key: number]: boolean }>({});
+
+    
+    const toggleLike = (id: number) => {
+        setLikedItems((prev) => ({
+            ...prev,
+            [id]: !prev[id], // jis id pe click kiya uska state toggle hoga
+        }));
+    };
+     const toggleLike1 = (id: number) => {
+        setLikedItems1((prev) => ({
+            ...prev,
+            [id]: !prev[id], // jis id pe click kiya uska state toggle hoga
+        }));
     };
 
     return (
@@ -651,8 +667,14 @@ export default function Details() {
                                             />Verified</span>
 
                                         )}
+                                        <button
+                                            onClick={() => toggleLike(p.id)}
+                                            className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition"
+                                        >
+                                            {likedItems[p.id] ? "❤️" : "🤍"}
+                                        </button>
 
-                                        <button className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition">🤍</button>
+                                        {/* <button className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition">🤍</button> */}
                                     </div>
                                 </div>
                                 <p className="text-gray-500 text-sm">{p.owner}</p>
@@ -701,7 +723,13 @@ export default function Details() {
                                     height={20}
                                 /> Verified</span>
                                         )}
-                                        <button className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition">🤍</button>
+                                        <button
+                                            onClick={() => toggleLike1(p.id)}
+                                            className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition"
+                                        >
+                                            {likedItems1[p.id] ? "❤️" : "🤍"}
+                                        </button>
+                                        {/* <button className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition">🤍</button> */}
                                     </div>
                                 </div>
                                 <p className="text-gray-500 text-sm">{p.owner}</p>

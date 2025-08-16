@@ -371,21 +371,21 @@
 //             {/* Agent Profile Card */}
 //             <section className="w-[87%] mx-auto mt-[150px]">
 //                 {/* <div className="bg-white rounded-2xl shadow-md p-4 flex flex-col sm:flex-row items-center sm:items-start gap-4 ">
-                    
+
 //                     <Image src="/Owner1.png"
 //                         alt="Agent" width={80}
 //                         height={80}
 //                         className="rounded-full object-cover" />
-                   
+
 //                     <div className="flex-1">
 //                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
 //                             <h2 className="text-[18px] text-[#000000] font-extrabold">Josef Jorden</h2>
 //                         </div> <p className="text-gray-500 text-sm">Josef Properties</p>
 //                         <p className="text-[#20202099] text-[12px]">Operating Since: 2008</p>
-                        
+
 //                         <div className="bg-blue-50 text-[#2450A0] text-[21px] font-extrabold px-3 py-2 rounded-lg mt-2 inline-block font-semibold">
 //                             124 <span className="text-[#000000] text-[12px] font-semibold">Total Property Listing</span> </div>
-                        
+
 //                         <p className="mt-3 text-gray-600 text-sm leading-relaxed">
 //                             <span className="text-[#000000] text-[12px] font-extrabold">Broker at Josef Properties, India</span> As an experienced real estate broker, I specialize in helping clients buy, sell, and invest in residential and commercial properties with confidence. </p>
 //                     </div>
@@ -401,7 +401,7 @@
 //                                                 className="rounded-full object-cover"
 //                                             />
 //                                         </div>
-                
+
 //                                         {/* Text Content Container */}
 //                                         <div>
 //                                             <div className="flex items-center gap-2">
@@ -420,13 +420,13 @@
 //                                             <p className="text-[12px] text-[#20202099]">Operating Since: 2008</p>
 //                                         </div>
 //                                     </div>
-                
+
 //                                     {/* Total Property Listing */}
 //                                     <div className="mt-4 bg-[#2450A01C]/89 p-3 rounded-lg flex items-center space-x-3">
 //                                         <span className="text-xl sm:text-2xl font-bold text-[#2450A0]">10</span>
 //                                         <span className="text-gray-800 font-medium text-sm">Total Property Listing</span>
 //                                     </div>
-                
+
 //                                     {/* Description */}
 //                                     <div className="mt-4">
 //                                         <h2 className="font-bold text-base text-gray-900">Broker at Josef Properties, India</h2>
@@ -617,40 +617,54 @@
 import Image from "next/image";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
-import { useState } from "react"; // useState को इम्पोर्ट करें
+import { useState } from "react";
 
 export default function Details() {
-    // स्लाइडिंग दिखाने के लिए मैंने कुछ और प्रॉपर्टीज़ जोड़ी हैं
     const properties = [
-        { id: 1, img: "/appartment.png", price: "$280,000", owner: "By Owner", verified: true, bhk: "2", bath: "2", sqft: "24", location: "1030 Spruce St, Aurora, IL, 60506" },
-        { id: 2, img: "/Apartment3.png", price: "$450,000", owner: "By Agent", verified: false, bhk: "3", bath: "3", sqft: "36", location: "221B Baker Street, London, UK" },
-        { id: 3, img: "/appartment.png", price: "$320,000", owner: "By Owner", verified: true, bhk: "1", bath: "1", sqft: "18", location: "5th Ave, New York, NY 10011" },
-        { id: 4, img: "/Apartment3.png", price: "$600,000", owner: "By Agent", verified: true, bhk: "4", bath: "4", sqft: "48", location: "90210 Beverly Hills, CA" },
-        { id: 5, img: "/appartment.png", price: "$750,000", owner: "By Owner", verified: true, bhk: "5", bath: "5", sqft: "60", location: "1600 Pennsylvania Avenue NW, Washington, DC" },
-        { id: 6, img: "/Apartment3.png", price: "$150,000", owner: "By Agent", verified: false, bhk: "1", bath: "1", sqft: "15", location: "10 Downing Street, London, UK" },
+        { id: 1, img: "/appartment.png", price: "$280,000", owner: "By Owner", verified: true, name: "Flat 1",name2: "Flat 1", bhk: "2", bath: "2", sqft: "24", location: "1030 Spruce St, Aurora, IL, 60506" },
+        { id: 2, img: "/Apartment3.png", price: "$450,000", owner: "By Agent", verified: false, name: "Flat 2",name2: "Flat 1", bhk: "3", bath: "3", sqft: "36", location: "221B Baker Street, London, UK" },
+        { id: 3, img: "/appartment.png", price: "$320,000", owner: "By Owner", verified: true, name: "Flat 3",name2: "Flat 1", bhk: "1", bath: "1", sqft: "18", location: "5th Ave, New York, NY 10011" },
+        { id: 4, img: "/Apartment3.png", price: "$600,000", owner: "By Agent", verified: true, name: "Flat 4", name2: "Flat 1", bhk: "4", bath: "4", sqft: "48", location: "90210 Beverly Hills, CA" },
+        { id: 5, img: "/appartment.png", price: "$750,000", owner: "By Owner", verified: true, name: "Flat 5", name2: "Flat 1", bhk: "5", bath: "5", sqft: "60", location: "1600 Pennsylvania Avenue NW, Washington, DC" },
+        { id: 6, img: "/Apartment3.png", price: "$150,000", owner: "By Agent", verified: false, name: "Flat 6", name2: "Flat 1", bhk: "1", bath: "1", sqft: "15", location: "10 Downing Street, London, UK" },
     ];
+    const [likedItems, setLikedItems] = useState<{ [key: number]: boolean }>({});
+    const [likedItems1, setLikedItems1] = useState<{ [key: number]: boolean }>({});
 
     const [saleIndex, setSaleIndex] = useState(0);
-      const [liked, setLiked] = useState(false);
-    const [rentIndex, setRentIndex] = useState(0);
-    const itemsPerPage = 4; // डेस्कटॉप पर एक बार में 4 आइटम दिखाएंगे
 
-    // "For Sale" सेक्शन के लिए स्लाइडर फंक्शन्स
+    const [rentIndex, setRentIndex] = useState(0);
+    const itemsPerPage = 4;
+    const toggleLike = (id: number) => {
+        setLikedItems((prev) => ({
+            ...prev,
+            [id]: !prev[id], // jis id pe click kiya uska state toggle hoga
+        }));
+    };
+     const toggleLike1 = (id: number) => {
+        setLikedItems1((prev) => ({
+            ...prev,
+            [id]: !prev[id], // jis id pe click kiya uska state toggle hoga
+        }));
+    };
+
+
+
     const nextSaleSlide = () => {
-        // यह सुनिश्चित करता है कि इंडेक्स ऐरे की सीमा से बाहर न जाए
+
         if (saleIndex < properties.length - itemsPerPage) {
             setSaleIndex(saleIndex + 1);
         }
     };
 
     const prevSaleSlide = () => {
-        // यह सुनिश्चित करता है कि इंडेक्स 0 से कम न हो
+
         if (saleIndex > 0) {
             setSaleIndex(saleIndex - 1);
         }
     };
 
-    // "For Rent" सेक्शन के लिए स्लाइडर फंक्शन्स
+
     const nextRentSlide = () => {
         if (rentIndex < properties.length - itemsPerPage) {
             setRentIndex(rentIndex + 1);
@@ -741,9 +755,15 @@ export default function Details() {
                                                 src="/Shieldcheck.png"
                                                 alt="Success Icon"
                                                 width={20}
-                                                height={20}/> Verified</span>
+                                                height={20} /> Verified</span>
                                         )}
-                                        <button className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition">🤍</button>
+                                        <button
+                                            onClick={() => toggleLike(p.id)}
+                                            className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition"
+                                        >
+                                            {likedItems[p.id] ? "❤️" : "🤍"}
+                                        </button>
+                                        {/* <button className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition">🤍</button> */}
                                     </div>
                                 </div>
                                 <p className="text-gray-500 text-sm">{p.owner}</p>
@@ -789,14 +809,14 @@ export default function Details() {
                                                 src="/Shieldcheck.png"
                                                 alt="Success Icon"
                                                 width={20}
-                                                height={20}/> Verified</span>
+                                                height={20} /> Verified</span>
                                         )}
                                           <button
-        onClick={() => setLiked(!liked)}
-        className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition"
-      >
-        {liked ? "❤️" : "🤍"}
-      </button>
+                                            onClick={() => toggleLike1(p.id)}
+                                            className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition"
+                                        >
+                                            {likedItems1[p.id] ? "❤️" : "🤍"}
+                                        </button>
                                         {/* <button className="bg-white border border-gray-300 rounded-full p-1 shadow-sm hover:scale-105 transition">🤍</button> */}
                                     </div>
                                 </div>
