@@ -21,7 +21,7 @@
 
 //         {/* ✅ Tag: For sale by owner */}
 //         <div className="absolute top-5 left-0 bg-[#2BAD4A] text-white md:mt-[130px] font-semibold md:px-6 md:py-2 py-1 px-4 rounded-tr-full rounded-br-full shadow-lg z-10">
-         
+
 //         </div>
 //       </div>
 
@@ -161,6 +161,7 @@ const properties = [
     sqft: "24 sqft",
     location: "1030 Spruce St, Aurora, IL 60506",
     ownerImage: "/Owner1.png",
+    verified: true
   },
   {
     id: 2,
@@ -172,6 +173,7 @@ const properties = [
     sqft: "30 sqft",
     location: "215 Main St, Denver, CO 80205",
     ownerImage: "/Owner2.png",
+    verified: true
   },
   {
     id: 3,
@@ -183,6 +185,7 @@ const properties = [
     sqft: "40 sqft",
     location: "789 Park Ave, Miami, FL 33101",
     ownerImage: "/Owner3.png",
+    verified: true
   },
 ];
 
@@ -254,10 +257,15 @@ export default function Details() {
                 <div>
                   <h2 className="text-[16px] md:text-xl font-bold text-[#0A0909]">
                     {property.price}
+                    
+
                   </h2>
+                  
                   <p className="text-[12px] md:text-base text-[#000104CC]">
                     {property.owner}
                   </p>
+                
+
                 </div>
                 <Image
                   src={property.ownerImage}
@@ -274,15 +282,15 @@ export default function Details() {
                   {property.bhk}
                 </span>
                 <span className="bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1 bg-[#0000000D] text-[13px] font-medium">
-                   {property.bath}
+                  {property.bath}
                 </span>
                 <span className="bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1 bg-[#0000000D] text-[13px] font-medium">
-                   {property.sqft}
+                  {property.sqft}
                 </span>
               </div>
 
               {/* Location */}
-              <div className="flex items-center gap-2 mt-4 text-sm text-[#0A090999] font-bold" style={{ borderRadius: "13px",border: "1px solid #0000000D" }}>
+              <div className="flex items-center gap-2 mt-4 text-sm text-[#0A090999] font-bold" style={{ borderRadius: "13px", border: "1px solid #0000000D" }}>
                 <img src="/locationcards.png" className="text-gray-400" />
                 {property.location}
               </div>

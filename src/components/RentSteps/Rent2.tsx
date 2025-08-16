@@ -288,7 +288,7 @@ export default function Uploadlisting() {
 
 
           {/* Expected Rent */}
-          <div className="mt-8">
+          <div className="mt-8 relative w-full md:w-[600px] lg:w-[500px] xl:w-[870px]">
             <label className="block text-[16px] font-semibold text-[#0A0909] mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>
               Expected Rent<span className="text-red-500">*</span>
             </label>
@@ -309,7 +309,7 @@ export default function Uploadlisting() {
           </div>
 
           {/* Expected Deposit */}
-          <div className="mt-5">
+          <div className="mt-5 relative w-full md:w-[600px] lg:w-[500px] xl:w-[870px]">
             <label className="block text-[16px] font-semibold text-[#0A0909] mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>
               Expected Deposit<span className="text-red-500">*</span>
             </label>
@@ -360,7 +360,7 @@ export default function Uploadlisting() {
             </select>
             
           </div> */}
-          <div className="mt-6 relative">
+          <div className="mt-6 relative w-full md:w-[600px] lg:w-[500px] xl:w-[870px]">
             <label className="block text-[16px] font-semibold text-[#0A0909] mb-2">
               Monthly Maintenance<span className="text-red-500">*</span>
             </label>

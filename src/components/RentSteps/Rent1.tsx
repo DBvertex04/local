@@ -367,22 +367,24 @@ const Rent1: React.FC<Rent1Props> = ({
   return (
     <div className="mt-6 space-y-5">
       {/* Location */}
-      <div className="relative w-full">
-        <input
-          type="text"
-          name="location"
-          placeholder="Enter Rental House Location"
-          value={formData.location}
-          onChange={handleChange}
-          className={`w-full border rounded-lg pl-4 pr-10 py-3 text-sm focus:outline-none ${formErrors.location ? "border-red-500" : "border-gray-300"
-            }`}
-        />
-        <img
-          src="/location.png"
-          alt="location"
-          className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none"
-        />
-      </div>
+      <div className="relative w-full md:w-[600px] lg:w-[500px] xl:w-[870px]">
+  <input
+    type="text"
+    name="location"
+    placeholder="Enter Rental House Location"
+    value={formData.location}
+    onChange={handleChange}
+    className={`w-full border rounded-lg pl-4 pr-10 py-3 text-sm focus:outline-none ${
+      formErrors.location ? "border-red-500" : "border-gray-300"
+    }`}
+  />
+  <img
+    src="/location.png"
+    alt="location"
+    className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none"
+  />
+</div>
+
 
       {/* Property Available For */}
       <div>
@@ -422,7 +424,7 @@ const Rent1: React.FC<Rent1Props> = ({
       </div>
 
       {/* Property Name */}
-      <div>
+      <div className="relative w-full md:w-[600px] lg:w-[500px] xl:w-[870px]">
         <label
           className="block text-[16px] font-semibold text-[#0A0909] mb-2 mt-6"
           style={{ fontFamily: "Poppins, sans-serif" }}
